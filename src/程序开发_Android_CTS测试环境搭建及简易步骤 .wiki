@@ -2,17 +2,17 @@
 
 %toc 目录
 
-= CTS是什么 =
+== CTS是什么 ==
 * 想必看到这里的同学都知道CTS是什么吧，不知道的话，自行Google，或者就不必往下看了。
 
-= 下载CTS测试包及手册 =
+== 下载CTS测试包及手册 ==
 
-== 下载 ==
+=== 下载 ===
 * *地址：* [[http://source.android.com/compatibility/downloads.html]]
 * 最新的CTS测试自动测试包手工测试包。
 * 在最下方有 The CTS User Manual
 
-== 配置环境 ==
+=== 配置环境 ===
 
 * 看下载的cts包路径下的：/android-cts/tools/README，顺着它接着看下载的用户手册，主要的一些配置步骤如下：
     * Set up accessibility tests:
@@ -21,13 +21,13 @@
     * Set up device administration tests:
         #  # adb install android-cts/repository/testcases/CtsDeviceAdmin.apk
         # On the device, enable Settings > Security > Device Administrators > android.deviceadmin.cts.CtsDeviceAdmin* settings
-    * 安装要测试试的apk， 比如
+    * 安装要测试的apk， 比如
         # # adb install /testcases/CtsMediaTestCases.apk
 
     
-= 开始测试 =
+== 开始测试 ==
     * 在路径 android-cts/tools/ 下运行命令 cts-tradefed
     * 然后在命令行下动行 run cts --class android.media.cts.DecoderTest
     *
-= 结果 =
+== 结果 ==
     * 最后，测试的结果及Log会存放到 android-cts/repository 下
