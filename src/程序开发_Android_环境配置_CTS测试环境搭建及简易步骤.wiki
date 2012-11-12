@@ -1,5 +1,6 @@
 [[index|首页]]
 
+%title CTS测试环境搭建及简易步骤
 %toc 目录
 
 == CTS是什么 ==

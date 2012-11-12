@@ -1,0 +1,37 @@
+[[index|首页]]
+
+%title SkipCutBuffer的研究
+%toc 目录
+
+== SkipCutBuffer是什么 ==
+* 今天研究Android源码突然发现了一个SkipCutBuffer类，以前从来没见过，赶紧看了一下Andoir4.0.3, 发现是没有这个东东的，原来是Android4.1是新增的功能。
+
+* 那它有什么用呢，搜索了一下，发现两个地方用到它了。 OMXCodec和ACodec。
+
+* 再进一步查看Google的Git提交记录。 Gitk一下，哈哈，找到啦，解释如下：
+
+        Support gapless playback for mp3 and m4a
+
+        Gapless playback for appropriately tagged mp3 and m4a files.
+        Currently this is implemented in OMXCodec, which most players
+        use, but should be easy to support in other players as well by
+        using the SkipCutBuffer utility class.
+
+* 那什么是gapless playback呢？
+
+== 什么是gapless playback ==
+
+* 对于有要求的音乐爱好者，是否支持gapless playback是判定优秀播放器的重要标准。所谓gapless playback是指在声轨和声轨之间没有间隙，这对听古典音乐，歌剧和现场录音特别重要。比如贝多芬第五交响乐的第3和第4乐章之间就是应该无间隙的。  (摘自于 “__音乐播放器 Pocket Music Player Bundle v5.3.5 汉化版__” 的说明)
+
+* 看来Google的Stagefright越来越完善啦，连gapless playback都开始支持了。 
+
+
+== 分析SkipCutBuffer源码 ==
+
+* 好了现在开始分析一下SkipCutBuffer的源码吧，这里最好画个图就好了，但是vimwiki中画图不太方便，直接描述吧，说清楚就行了。
+    * 此类有两个参数skip和cut,(所以叫SkipCutBuffer，哈哈），skip指的是当前音乐最头需要扔几帧，cut指的是此音乐播放到最后需要扔几帧。
+    * 无缝播放应该就是这种模式：前一个首音乐和后一首连起来，中间没有停顿，SkipCutBuffer用扔前后一点数据来实现，算法很简单是不是^_^
+    * 用的时候呢，只对第一帧丢弃一点点数据(skip)，然后对于每一帧数据均需要切割，把后边的cut长度的数据不进行播放，留到一下帧数据去。如果是最后一帧数据会发生什么情况呢，哈哈～～
+
+* 用法：在Stagefright中，总共有两处用到了SkipCutBuffer: OMXCodec和ACodec, 都比较简单，这里就不说了。 ACodec的用法还有一个错误，呵呵～
+
