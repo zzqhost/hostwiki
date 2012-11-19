@@ -1,10 +1,10 @@
 #container {margin:0 auto; width:900px;}
-#header {font-family:华文行楷; font-size:xx-large; font-weight:normal; color:#FF6600;text-align:center;padding:15px 0px;height:100px; background:#6cf; margin-bottom:5px;vertical-align:middle;line-height:100px;}
-#menu { height:30px; background:#09c; margin-bottom:5px;}
-#mainContent { background:url(bg.gif) 0 0 repeat-y; overflow:auto;zoom:1; margin-bottom:5px;}
+#header {font-family:华文行楷; font-size:xx-large; font-weight:normal; color:#FF6600;text-align:center;padding:15px 0px;height:100px; margin-bottom:5px;vertical-align:middle;line-height:100px;}
+#menu { height:30px; margin-bottom:5px;}
+#mainContent { overflow:auto;zoom:1; margin-bottom:5px;}
 #sidebar { float:left; width:200px; background:#9ff;}
-#content { float:right; width:675px; padding:10px; background:#cff;}
-#footer {height:60px; background:#6cf;text-align:center;font-family:微软雅黑; font-size:small; font-weight: normal; color: #00993}
+#content { float:right; width:875px; padding:10px; }
+#footer {height:60px; text-align:center;font-family:微软雅黑; font-size:small; font-weight: normal; color: #00993}
 .clearfloat { clear:both; height:0; font-size: 1px; line-height: 0px;}
 
 
