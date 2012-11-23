@@ -1,0 +1,29 @@
+[[index|首页]]
+
+%title ubuntu安装极点五笔输入法
+
+==说明==
+* 安装的是极点输入法
+* 是ibus框架下的
+
+==安装步骤==
+
+* 下载附件文件vissible-ibus.tar.gz
+    * 免费下载地址在 [[http://linux.linuxidc.com/]]
+    * 用户名与密码都是 www.linuxidc.com
+    * 具体下载目录在 /pub/2011/10/23/Ubuntu 11.10安装极点五笔/
+
+* 右键点下载好的“vissible-ibus.tar.gz”压缩包，然后选”解压到此处”即可得到“vissible.db、vissible.gif、vissible.txt"三个文件，然后将这三个文件全部移动到”主文件夹“目录下。
+
+* 按快捷键“Ctrl+Alt+T"调出终端并输入下面命令后回车：
+    * $ sudo cp vissible.db /usr/share/ibus-table/tables
+    * $ sudo cp vissible.gif /usr/share/ibus-table/icons
+
+* 完了之后把“主文件夹里的三个文件删除即可。
+
+*  启用
+    *  在任务栏右键点那个键盘小图标，在下拉菜单选“重新重启”（这个重新启动并不是重并报启动系统，而是重新启动ibus输入法）
+    * 然后再右键点那个键盘小图标并在下拉菜单中选“首选项”，
+    * 然后在弹出的窗口中点击“输入法”选项卡，
+    * 接着点“选择输入法”，
+    * 然后添加极点五笔就可以了。

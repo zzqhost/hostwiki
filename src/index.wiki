@@ -1,4 +1,5 @@
 
+%title allpages
 
 * *程序设计_C/C++*
 
@@ -13,6 +14,8 @@
 | [[程序开发_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]] |   |   |   |
 
 * *Linux系统_学习笔记*
+
+| [[Linux系统_学习笔记_ubuntu安装极点五笔输入法|ubuntu安装极点五笔输入法]] |   |   |   |
 
 * *Linux系统_搭建服务器*
 
