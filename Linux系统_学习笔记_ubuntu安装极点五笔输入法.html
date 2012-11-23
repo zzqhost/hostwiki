@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>allpages</title>
+    <title>ubuntu安装极点五笔输入法</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="Stylesheet" type="text/css" href="cssandjs/style.css" />
 </head>
@@ -13,128 +13,87 @@
     <div id="header">张志强的博客</div>
     <br class="clearfloat" />
     <div id="content">
+<p>
+<a href="index.html">首页</a>
+</p>
 
+
+<h2 id="toc_0.1">1. 说明</h2>
+<ul>
+<li>
+安装的是极点输入法
+
+<li>
+是ibus框架下的
+
+</ul>
+
+<h2 id="toc_0.2">2. 安装步骤</h2>
 
 <ul>
 <li>
-<strong>程序设计_C/C++</strong>
+下载附件文件vissible-ibus.tar.gz
+
+<ul>
+<li>
+免费下载地址在 <a href="http://linux.linuxidc.com/">http://linux.linuxidc.com/</a>
+
+<li>
+用户名与密码都是 www.linuxidc.com
+
+<li>
+具体下载目录在 /pub/2011/10/23/Ubuntu 11.10安装极点五笔/
+
+</ul>
+</ul>
+
+<ul>
+<li>
+右键点下载好的“vissible-ibus.tar.gz”压缩包，然后选”解压到此处”即可得到“vissible.db、vissible.gif、vissible.txt"三个文件，然后将这三个文件全部移动到”主文件夹“目录下。
 
 </ul>
 
 <ul>
 <li>
-<strong>程序设计_Java</strong>
+按快捷键“Ctrl+Alt+T"调出终端并输入下面命令后回车：
+
+<ul>
+<li>
+$ sudo cp vissible.db /usr/share/ibus-table/tables
+
+<li>
+$ sudo cp vissible.gif /usr/share/ibus-table/icons
+
+</ul>
+</ul>
+
+<ul>
+<li>
+完了之后把“主文件夹里的三个文件删除即可。
 
 </ul>
 
 <ul>
 <li>
-<strong>程序设计_Android_环境配置</strong>
-
-</ul>
-
-<table>
-<tr>
-<td>
-<a href="程序开发_Android_环境配置_CTS测试环境搭建及简易步骤.html">CTS测试环境搭建及简易步骤</a>
-</td>
-<td>
-&nbsp;
-</td>
-<td>
-&nbsp;
-</td>
-<td>
-&nbsp;
-</td>
-</tr>
-</table>
+ 启用
 
 <ul>
 <li>
-<strong>程序设计_Android_代码研究</strong>
+ 在任务栏右键点那个键盘小图标，在下拉菜单选“重新重启”（这个重新启动并不是重并报启动系统，而是重新启动ibus输入法）
+
+<li>
+然后再右键点那个键盘小图标并在下拉菜单中选“首选项”，
+
+<li>
+然后在弹出的窗口中点击“输入法”选项卡，
+
+<li>
+接着点“选择输入法”，
+
+<li>
+然后添加极点五笔就可以了。
 
 </ul>
-
-<table>
-<tr>
-<td>
-<a href="程序开发_Android_代码研究_SkipCutBuffer的研究.html">SkipCutBuffer的研究</a>
-</td>
-<td>
-&nbsp;
-</td>
-<td>
-&nbsp;
-</td>
-<td>
-&nbsp;
-</td>
-</tr>
-</table>
-
-<ul>
-<li>
-<strong>Linux系统_学习笔记</strong>
-
-</ul>
-
-<table>
-<tr>
-<td>
-<a href="Linux系统_学习笔记_ubuntu安装极点五笔输入法.html">ubuntu安装极点五笔输入法</a>
-</td>
-<td>
-&nbsp;
-</td>
-<td>
-&nbsp;
-</td>
-<td>
-&nbsp;
-</td>
-</tr>
-</table>
-
-<ul>
-<li>
-<strong>Linux系统_搭建服务器</strong>
-
-</ul>
-
-<ul>
-<li>
-<strong>多媒体相关</strong>
-
-</ul>
-
-<table>
-<tr>
-<td>
-<a href="多媒体相关_流媒体中用到的几个协议简介.html">流媒体中用到的几个协议简介</a>
-</td>
-<td>
-&nbsp;
-</td>
-<td>
-&nbsp;
-</td>
-<td>
-&nbsp;
-</td>
-</tr>
-</table>
-
-<ul>
-<li>
-<strong>vim</strong>
-
-</ul>
-
-<ul>
-<li>
-<strong>关于</strong>
-
 </ul>
 </div>
     <br class="clearfloat" />
@@ -157,7 +116,7 @@
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        var disqus_identifier = 'host_allpages'
+        var disqus_identifier = 'host_ubuntu安装极点五笔输入法'
 
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'zzqhost'; // required: replace example with your forum shortname
