@@ -1,0 +1,86 @@
+[[index|首页]]
+
+%title HTTP-progressive-streaming分析
+
+=HTTP Progressive Streaming 分析=
+
+%toc
+
+==数据源设置DataSource==
+* 对于http progressive download模式的数据源，分为两步完成：
+    # 客户端调用setDataSource(const char*uri, …)后，AwesomePlayer保存了uri的值，其实没有做什么实质的事情，也没有发起连接。真正的连接网络并sniff的过程是在prepare的时候才进行的。
+    # 客户端调用prepare，AwesomePlayerpost一个onPrepareAsyncEvent事件，在其回调函数中调用finishSetDataSource_l函数，发起连接获取源的文件头，读取文件头的MIMETYPE信息，再根据MIMETYPE信息创建相应的MediaExtractor。最后这个MediaExtractor才是AwesomePlayer的数据源。读取原始数据源的dataSource将委托给MediaExtractor来调用。AwesomePlayer只从MediaExtractor中读取已经extract过的数据。
+
+
+* 在finishSetDataSource_l中，用到了几个DataSource
+    # NuCachedSource2
+        * 带缓存的DataSource，不包含媒体信息，只管理缓存以及调用底层的DataSource读取和缓存数据。可以获取缓存的信息以及操作缓存。
+    # HTTPBase
+        * 基于http连接的DataSource，具有带宽管理功能，没有实现http连接功能
+    # ChromiumHTTPDataSource
+        * HTTPBase的子类，真正操作和管理http连接及状态。ChromiumHTTPDataSource本身也不会直接操作socket，而是采用SfDelegate作为http协议栈来进行http连接的发起和关闭，本身通过注册回调函数(onConnectionEstablished, onDisconnectComplete等)来获取连接信息。ChromiumHTTPDataSource不进行缓存管理，如果调用readAt，将直接调用SfDelegate，如果需要连接就发起连接，可见如果没有缓存管理每次直接操作ChromiumHTTPDataSource将有可能不断发起网络连接造成性能低下。
+
+* finishSetDataSource_l函数中设置数据源的真正操作如下
+    # 首先设置连接源
+        # 如果是Widevine 协议的DRM，由于没有缓存，直接使用HTTPBase
+        # 其它形式的Http progressive download使用NuCachedSource2
+        # 对于视频源，首先下载至少192KB(192x1024)字节的文件缓存用于Sniff文件头，
+    # Sniff到文件头信息后，获取MIMETYPE，并创建相应的MediaExtractor，再次调用setDataSource_l(extractor);至此DataSource正式建立完成。
+
+==ChromiumHTTPDataSource中的PageCache缓存数据结构==
+* PageCache包含两个page list: active pages和 free pages:
+    # List<Page*> mActivePages;  保存了有效数据的缓存，其中的连续的list构成了一段连续的媒体内容
+    # List<Page*> mFreePages; 可用缓存，可能是有数据但是已经无效的内存，或者是空内存
+
+* PageCache初始化时就确定了每个Page的最大size：
+{{{
+    PageCache::PageCache(size_t pageSize)
+        : mPageSize(pageSize), mTotalSize(0) {
+
+    }
+
+}}}
+
+* 获取一个可用的page： acquirePage
+    * rator从free pages中获取第一个page，并从free pages中删除该page。如果没有则直接malloc一个。
+*   获取到page后，通过page data指针往里面填充数据，再调用appendPage将page加入到active pages中。
+*   释放缓存： releasePage
+    * releasePage时并不free指针，也不从active pages中移除。只是清空size信息并将page放到freePages中以便下次重用。由此可见整个cache实际占用内存的大小应该是非递减的，等于运行过程中占用内存的最大值。（WHY?）由于page cache中的list代表的是连续媒体，因此不能release list中间的一个page,只能release list头部或尾部的page。
+
+* 整个cache中数据量保存在PageCache的mTotalSize中，每次appendPage时累加当前page中的实际数据量(mSize)。
+
+
+==NuCachedSource2读取网络==
+* 如何驱动
+    * NuCachedSource2被创建（new）时就立即post了一个kWhatFetchMore消息，onFetch调用最后语句又post了一个kWhatFetchMore，并且此前没有return语句，所以可见在NuCachedSource2的生存期内，kWhatFetchMore是个一直存在的循环驱动事件，但是事件post的delay时间不一样，如果是重试，delay 3s, 如果是空闲状态，delay 100ms。
+
+* HighwaterThresholdBytes
+    * 当cache数据大于mHighwaterThresholdBytes时，停止fetch，并根据设置决定是否disconnect(). 默认20KB
+
+*   LowwaterThresholdBytes
+    * restartPrefetcher中判断当cache的数据量大于阈值mLowwaterThresholdBytes时，就不再prefetch了。默认4KB.
+
+
+==数据获取==
+
+===keepAlive===
+* 应该是针对有session的http连接，通过ALooper::GetNowUs计时，每隔mKeepAliveIntervalUs时间将调用fetchIntenal()保持与server的连接。默认间隔设置为15s。
+
+===预取数据：restartPrefetcherIfNecessary_l===
+* 几个变量：
+    * Lastaccess position (mLastAccessPos): 表示数据调用者最后一次读取的位置，
+    * Cacheoffset (mCacheOffset): Cache数据在整个源数据文件中的偏移位置。
+
+* void NuCachedSource2::restartPrefetcherIfNecessary_l(bool ignoreLowWaterThreshold, bool force)
+    * Prefetch操作相当于随着播放的进行cache也会自动往前进行，每次prefetch释放当前page cache中已经播放过的的active pages，并更新cache offset至合适的位置。
+    * ignoreLowWaterThreshold： 当cache的数据量大于阈值mLowwaterThresholdBytes时，就不再prefetch了。
+    * force
+        * last access与Cache偏移位置之间可以保留一个kGrayArea大小的数据，这部分数据是已经访问过的数据，理论上可以被忽略并释放，但考虑到seek或其它操作（如带Bframe的媒体？）中会再次用到，如果释放的话会引起再次重连网络获取影响性能，因此在保留不释放。force变量用于控制释放cache时，是否保留gray area.
+
+
+==读取数据源readAt==
+* 原型： readAt(off64_toffset, void *data, size_t size)
+* NuCachedSource2会首先在cache中查找offset和size是否能被满足（再次注意，cache中的多个page代表的是连续的媒体内容）
+* 如果满足，直接从cache中拷贝到目标指针并返回，否则post一个kWhatRead消息，调用线程被阻塞（condition.wait()）。
+* onRead()回调: 调用readInternal，返回-EAGAIN时，延迟50ms继续发送kWhatRead消息。直到成功或者返回IO错误时，broadcast解除阻塞中的调用线程。
+* readInternal(): 调用restartPrefetcherIfNecessary_l进行数据预取，如果不满足read条件（offset,size）则返回-EAGAIN，成功则拷贝目标数据。

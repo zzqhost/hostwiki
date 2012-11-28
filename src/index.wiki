@@ -1,5 +1,7 @@
 
+%template index_template
 %title allpages
+
 
 * *程序设计_C/C++*
 
@@ -11,7 +13,7 @@
 
 * *程序设计_Android_代码研究*
 
-| [[程序开发_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]] |   |   |   |
+| [[程序开发_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]] | [[程序开发_Android_代码研究_HTTP-progressive-streaming分析|HTTP progressive streaming分析]] |   |   |
 
 * *Linux系统_学习笔记*
 

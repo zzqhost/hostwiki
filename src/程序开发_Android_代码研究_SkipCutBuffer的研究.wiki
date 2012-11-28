@@ -1,7 +1,10 @@
 [[index|首页]]
 
 %title SkipCutBuffer的研究
-%toc 目录
+
+
+=SkipCutBuffer的研究=
+%toc
 
 == SkipCutBuffer是什么 ==
 * 今天研究Android源码突然发现了一个SkipCutBuffer类，以前从来没见过，赶紧看了一下Andoir4.0.3, 发现是没有这个东东的，原来是Android4.1是新增的功能。
