@@ -1,0 +1,319 @@
+<html>
+  <head>
+    <title>HTTP-progressive-streaming分析</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="Stylesheet" type="text/css" href="cssandjs/style.css" />
+</head>
+
+
+<body>
+
+
+<div id="container">
+    <div id="header">张志强的博客</div>
+    <br class="clearfloat" />
+    <div id="content">
+<p>
+<a href="index.html">首页</a>
+</p>
+
+
+<h1 id="toc_1"> HTTP Progressive Streaming 分析</h1>
+
+<div class="toc">
+<ul>
+<li><a href="#toc_1"> HTTP Progressive Streaming 分析</a>
+<ul>
+<li><a href="#toc_1.1">1. 数据源设置DataSource</a>
+<li><a href="#toc_1.2">2. ChromiumHTTPDataSource中的PageCache缓存数据结构</a>
+<li><a href="#toc_1.3">3. NuCachedSource2读取网络</a>
+<li><a href="#toc_1.4">4. 数据获取</a>
+<ul>
+<li><a href="#toc_1.4.1">4.1. keepAlive</a>
+<li><a href="#toc_1.4.2">4.2. 预取数据：restartPrefetcherIfNecessary_l</a>
+</ul>
+<li><a href="#toc_1.5">5. 读取数据源readAt</a>
+</ul>
+</ul>
+</div>
+
+<h2 id="toc_1.1">1. 数据源设置DataSource</h2>
+<ul>
+<li>
+对于http progressive download模式的数据源，分为两步完成：
+
+<ol>
+<li>
+客户端调用setDataSource(const char*uri, …)后，AwesomePlayer保存了uri的值，其实没有做什么实质的事情，也没有发起连接。真正的连接网络并sniff的过程是在prepare的时候才进行的。
+
+<li>
+客户端调用prepare，AwesomePlayerpost一个onPrepareAsyncEvent事件，在其回调函数中调用finishSetDataSource_l函数，发起连接获取源的文件头，读取文件头的MIMETYPE信息，再根据MIMETYPE信息创建相应的MediaExtractor。最后这个MediaExtractor才是AwesomePlayer的数据源。读取原始数据源的dataSource将委托给MediaExtractor来调用。AwesomePlayer只从MediaExtractor中读取已经extract过的数据。
+
+</ol>
+</ul>
+
+
+<ul>
+<li>
+在finishSetDataSource_l中，用到了几个DataSource
+
+<ol>
+<li>
+NuCachedSource2
+
+<ul>
+<li>
+带缓存的DataSource，不包含媒体信息，只管理缓存以及调用底层的DataSource读取和缓存数据。可以获取缓存的信息以及操作缓存。
+
+</ul>
+<li>
+HTTPBase
+
+<ul>
+<li>
+基于http连接的DataSource，具有带宽管理功能，没有实现http连接功能
+
+</ul>
+<li>
+ChromiumHTTPDataSource
+
+<ul>
+<li>
+HTTPBase的子类，真正操作和管理http连接及状态。ChromiumHTTPDataSource本身也不会直接操作socket，而是采用SfDelegate作为http协议栈来进行http连接的发起和关闭，本身通过注册回调函数(onConnectionEstablished, onDisconnectComplete等)来获取连接信息。ChromiumHTTPDataSource不进行缓存管理，如果调用readAt，将直接调用SfDelegate，如果需要连接就发起连接，可见如果没有缓存管理每次直接操作ChromiumHTTPDataSource将有可能不断发起网络连接造成性能低下。
+
+</ul>
+</ol>
+</ul>
+
+<ul>
+<li>
+finishSetDataSource_l函数中设置数据源的真正操作如下
+
+<ol>
+<li>
+首先设置连接源
+
+<ol>
+<li>
+如果是Widevine 协议的DRM，由于没有缓存，直接使用HTTPBase
+
+<li>
+其它形式的Http progressive download使用NuCachedSource2
+
+<li>
+对于视频源，首先下载至少192KB(192x1024)字节的文件缓存用于Sniff文件头，
+
+</ol>
+<li>
+Sniff到文件头信息后，获取MIMETYPE，并创建相应的MediaExtractor，再次调用setDataSource_l(extractor);至此DataSource正式建立完成。
+
+</ol>
+</ul>
+
+<h2 id="toc_1.2">2. ChromiumHTTPDataSource中的PageCache缓存数据结构</h2>
+<ul>
+<li>
+PageCache包含两个page list: active pages和 free pages:
+
+<ol>
+<li>
+List&lt;Page*&gt; mActivePages;  保存了有效数据的缓存，其中的连续的list构成了一段连续的媒体内容
+
+<li>
+List&lt;Page*&gt; mFreePages; 可用缓存，可能是有数据但是已经无效的内存，或者是空内存
+
+</ol>
+</ul>
+
+<ul>
+<li>
+PageCache初始化时就确定了每个Page的最大size：
+<pre>
+    PageCache::PageCache(size_t pageSize)
+        : mPageSize(pageSize), mTotalSize(0) {
+
+    }
+
+</pre>
+
+</ul>
+
+<ul>
+<li>
+获取一个可用的page： acquirePage
+
+<ul>
+<li>
+rator从free pages中获取第一个page，并从free pages中删除该page。如果没有则直接malloc一个。
+
+</ul>
+<li>
+  获取到page后，通过page data指针往里面填充数据，再调用appendPage将page加入到active pages中。
+
+<li>
+  释放缓存： releasePage
+
+<ul>
+<li>
+releasePage时并不free指针，也不从active pages中移除。只是清空size信息并将page放到freePages中以便下次重用。由此可见整个cache实际占用内存的大小应该是非递减的，等于运行过程中占用内存的最大值。（WHY?）由于page cache中的list代表的是连续媒体，因此不能release list中间的一个page,只能release list头部或尾部的page。
+
+</ul>
+</ul>
+
+<ul>
+<li>
+整个cache中数据量保存在PageCache的mTotalSize中，每次appendPage时累加当前page中的实际数据量(mSize)。
+
+</ul>
+
+
+<h2 id="toc_1.3">3. NuCachedSource2读取网络</h2>
+<ul>
+<li>
+如何驱动
+
+<ul>
+<li>
+NuCachedSource2被创建（new）时就立即post了一个kWhatFetchMore消息，onFetch调用最后语句又post了一个kWhatFetchMore，并且此前没有return语句，所以可见在NuCachedSource2的生存期内，kWhatFetchMore是个一直存在的循环驱动事件，但是事件post的delay时间不一样，如果是重试，delay 3s, 如果是空闲状态，delay 100ms。
+
+</ul>
+</ul>
+
+<ul>
+<li>
+HighwaterThresholdBytes
+
+<ul>
+<li>
+当cache数据大于mHighwaterThresholdBytes时，停止fetch，并根据设置决定是否disconnect(). 默认20KB
+
+</ul>
+</ul>
+
+<ul>
+<li>
+  LowwaterThresholdBytes
+
+<ul>
+<li>
+restartPrefetcher中判断当cache的数据量大于阈值mLowwaterThresholdBytes时，就不再prefetch了。默认4KB.
+
+</ul>
+</ul>
+
+
+<h2 id="toc_1.4">4. 数据获取</h2>
+
+<h3 id="toc_1.4.1">4.1. keepAlive</h3>
+<ul>
+<li>
+应该是针对有session的http连接，通过ALooper::GetNowUs计时，每隔mKeepAliveIntervalUs时间将调用fetchIntenal()保持与server的连接。默认间隔设置为15s。
+
+</ul>
+
+<h3 id="toc_1.4.2">4.2. 预取数据：restartPrefetcherIfNecessary_l</h3>
+<ul>
+<li>
+几个变量：
+
+<ul>
+<li>
+Lastaccess position (mLastAccessPos): 表示数据调用者最后一次读取的位置，
+
+<li>
+Cacheoffset (mCacheOffset): Cache数据在整个源数据文件中的偏移位置。
+
+</ul>
+</ul>
+
+<ul>
+<li>
+void NuCachedSource2::restartPrefetcherIfNecessary_l(bool ignoreLowWaterThreshold, bool force)
+
+<ul>
+<li>
+Prefetch操作相当于随着播放的进行cache也会自动往前进行，每次prefetch释放当前page cache中已经播放过的的active pages，并更新cache offset至合适的位置。
+
+<li>
+ignoreLowWaterThreshold： 当cache的数据量大于阈值mLowwaterThresholdBytes时，就不再prefetch了。
+
+<li>
+force
+
+<ul>
+<li>
+last access与Cache偏移位置之间可以保留一个kGrayArea大小的数据，这部分数据是已经访问过的数据，理论上可以被忽略并释放，但考虑到seek或其它操作（如带Bframe的媒体？）中会再次用到，如果释放的话会引起再次重连网络获取影响性能，因此在保留不释放。force变量用于控制释放cache时，是否保留gray area.
+
+</ul>
+</ul>
+</ul>
+
+
+<h2 id="toc_1.5">5. 读取数据源readAt</h2>
+<ul>
+<li>
+原型： readAt(off64_toffset, void *data, size_t size)
+
+<li>
+NuCachedSource2会首先在cache中查找offset和size是否能被满足（再次注意，cache中的多个page代表的是连续的媒体内容）
+
+<li>
+如果满足，直接从cache中拷贝到目标指针并返回，否则post一个kWhatRead消息，调用线程被阻塞（condition.wait()）。
+
+<li>
+onRead()回调: 调用readInternal，返回-EAGAIN时，延迟50ms继续发送kWhatRead消息。直到成功或者返回IO错误时，broadcast解除阻塞中的调用线程。
+
+<li>
+readInternal(): 调用restartPrefetcherIfNecessary_l进行数据预取，如果不满足read条件（offset,size）则返回-EAGAIN，成功则拷贝目标数据。
+
+</ul>
+</div>
+    <br class="clearfloat" />
+
+
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F0cbe0839852542956fe17f62ec5746ce' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = 'host_HTTP-progressive-streaming分析'
+
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'zzqhost'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    <div id="footer">
+            zzqhost&nbsp;&copy;&nbsp;2012-2013&nbsp;
+            <a href="http://www.zzqhost.com" target="_blank">www.zzqhost.com</a>
+            <br>
+            Generated by
+            <a href="http://www.vim.org" target="_blank">Vim</a>
+            &amp;
+            <a href="http://code.google.com/p/vimwiki/" target="_blank">Vimwiki</a>
+    </div>
+
+</div>
+
+</body>
+</html>
