@@ -9,11 +9,14 @@
 
 * *程序设计_Android_环境配置*
 
-| [[程序开发_Android_环境配置_CTS测试环境搭建及简易步骤|CTS测试环境搭建及简易步骤]] | [[程序开发_Android_环境配置_将Android源代码导入到Eclipse中|将Android源代码导入到Eclipse中]] |   |   |
+| [[程序设计_Android_环境配置_CTS测试环境搭建及简易步骤|CTS测试环境搭建及简易步骤]] | [[程序设计_Android_环境配置_将Android源代码导入到Eclipse中|将Android源代码导入到Eclipse中]] | [[程序设计_Android_环境配置_配置Android开发环境|配置Android开发环境]] |   |
 
 * *程序设计_Android_代码研究*
 
-| [[程序开发_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]] | [[程序开发_Android_代码研究_HTTP-progressive-streaming分析|HTTP progressive streaming分析]] |   |   |
+| [[程序设计_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]] | [[程序设计_Android_代码研究_HTTP-progressive-streaming分析|HTTP progressive streaming分析]] |   |   |
+
+* *程序设计_IDE配置*
+| [[程序设计_IDE配置_QTCreater调试时提示ptrace不允许的操作|QTCreater调试时提示ptrace不允许的操作]] |
 
 * *Linux系统_学习笔记*
 
@@ -23,8 +26,10 @@
 
 * *多媒体相关*
 
-| [[多媒体相关_流媒体中用到的几个协议简介|流媒体中用到的几个协议简介]] |   |   |   |
+| [[多媒体相关_流媒体中用到的几个协议简介|流媒体中用到的几个协议简介]] | [[多媒体相关_DRM标准学习笔记1|DRM标准学习笔记1]] |   |   |
 
 * *vim*
+
+* 其它
 
 * *关于*

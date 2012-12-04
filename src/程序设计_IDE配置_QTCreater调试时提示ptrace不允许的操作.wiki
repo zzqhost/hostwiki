@@ -1,0 +1,22 @@
+%title QTCreater调试时提示ptrace不允许的操作
+
+=QTCreater调试时提示ptrace不允许的操作=
+
+%toc
+
+==问题描述==
+* 用QTCreater建立了一个纯C++的项目，但是在F5调试时，竟然提示ptrace不允许的操作，修改工程配置为Debug也不管用，经过网上搜索，原来还需要修改一下系统ptrace的配置。
+
+==解决办法==
+* 临时性的解决方法
+    * $ sudo echo 0 > /proc/sys/kernel/yama/ptrace_scope 
+
+* 这样不过重启电脑之后就又恢复成原来的样子了，一劳永逸的方法：
+    * $ sudo vi /etc/sysctl.d/10-ptrace.conf
+    * $ kernel.yama.ptrace_scope = 0
+    * 重启电脑就好了，
+
+* 据说在Ubuntu 11.04之后都会出现这种问题，貌似是为了安全
+
+==ptrace==
+* 那么ptrace是个什么东东啊，貌似是Linux下边调试时用到的一个东东，以后有空研究一下。
