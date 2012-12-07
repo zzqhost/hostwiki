@@ -11,6 +11,8 @@
 * 好了，开始配置了...
 
 ==步骤==
+* 首先切换到root权限，以方便后续的操作
+    * $ sudo su
 * 安装需要的软件包（include git and subversion）
 {{{
 aptitude -y install ant binutils binutils-dev binutils-static \
@@ -43,5 +45,107 @@ xml2 wmctrl ant1.8
     * 安装
         * $ chmod 777 jdk-6u33-linux-x64.bin
         * $ ./jdk-6u33-linux-x64.bin
-    * 
+    * 把上步解开的文件夹移动到系统路径中,并建立链接
+        * $ mv jdk1.6.0_33 /usr/local
+        * $ ln -s /usr/local/jdk1.6.0_33 /usr/local/jdk1.6
+    * 配置PATH
+{{{
+echo " PATH=/usr/local/jdk1.6/bin:/usr/local/arm-linux/bin:\$PATH:
+CLASSPATH=/usr/local/jdk1.6/lib:.
+JAVA_HOME=/usr/local/jdk1.6
+export PATH CLASSPATH JAVA_HOME
+alias vi=vim
+alias h=htop
+alias screen='screen -R -DD'
+export VISUAL=vim" >>/etc/bash.bashrc
+  }}}
+
+==编译==
+===配置编译环境===
+* $ . build/envsetup.sh （注意 . 后的空格）
+* $ lunch (全部采用默认，直接回车)
+    
+===Building===
+* 编译全部代码(可不用配置上步的编译环境)： 源码路径下执行以下命令
+    * $ make -j4
+
+* 按模块编译(可不用配置上步的编译环境)
+    * $ make mediaserver
+    * $ make frameworks
+    * 模块编译会自动处理相关的一些依赖库。
+
+* 按路径编译部分代码(在源码根路径下, 必须配置上步编译环境)
+    * $ mmm frameworks/av/media/libstagefright/
+    * $ mmm framworks/base/
+    * 此种方法只编译此路径下的代码，必须要有Android.mk,如果是java代码可不需要。
+
+* 编译完之后，如果需要把刚编译好的一个so或apk之类的烧到模拟器中，则运行下述命令
+    * $ make snod
+
+==运行模拟器==
+* 只运行模拟器, 在源码路径下执行以下命令：
+    * $ . build/envsetup.sh
+    * $ lunch
+    * $ emulator &
+* 带SD卡启动
+    * $ . build/envsetup.sh
+    * $ lunch
+    * $ emulator -sdcard ~/work/andord_lx/sdcard/sdcard.img &
+* 带SD卡启动大屏幕
+    * $ . build/envsetup.sh
+    * $ lunch
+    * $ emulator -sdcard ~/work/andord_lx/sdcard/sdcard.img -skin NGB720P &
+
+== 安装软件并播放SD卡上的视频  ==
+=== 创建SD卡 ===
+* 例如创建一个名为sdcard.img的128M(M需大写）SD卡镜像到~/work/android_lx/sdcard/下 
+    * $ cd ~/work 
+    * $ mkdir android_lx/sdcard -p 
+    * $ cd android_lx/sdcard 
+    * $ mksdcard 128M sdcard.img
+
+* 如果提示找不到mksdcard命令，则需要在源码路径下执行以下命令： 
+    * $ . build/envsetup.sh 
+    * $ lunch
+
+=== 向emulator的SD卡镜像写入数据  ===
+
+# 方法一(速度快，推荐) 
+    * $ sudo mkdir /mnt/sdcard 
+    * $ sudo mount -o loop ~/work/android_lx/sdcard/sdcard.img /mnt/sdcard/ 
+    * $ sudo cp ~/Video/shrek.mkv /mnt/sdcard/ 
+    * $ ls -al /mnt/sdcard/ 
+    * $ sudo umount /mnt/sdcard 
+# 方法二(速度慢，直观) 
+    * $ emulator -sdcard ~/work/android_lx/sdcard.img &
+    * $ adb push ~/Video/hahan.mp4 /sdcard 
+    * $ adb shell 
+    * $ ls /sdcard/ -l
+
+=== 模拟器挂载SD卡镜像 ===
+* $ emulator -sdcard ~/work/andord_lx/sdcard/sdcard.img &
+
+这样启动模拟器后，模拟器就不会抱怨没有SD卡了。 
+
+=== 安装apk包  ===
+
+在确保模拟器已经启动的情况下 
+
+* $ adb install ~/work/android_lx/SeeJoPlayer.apk
+
+如果提示找不到adb命令，则需要在源码路径下执行以下命令： 
+
+* $ . build/envsetup.sh 
+* $ lunch
+
+== 模拟器的相关操作  ==
+
+# 进入Android shell 
+    * $ adb shell 
+# 在模拟器中打印LOG 
+    * $ logcat 
+# 退出模拟器shell 
+    * $ exit 
+# 调整横坚屏 
+    * Ctrl+F12
 
