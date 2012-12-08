@@ -1,0 +1,315 @@
+%title 多媒体编解码基础知识
+
+=多媒体编解码基础知识=
+
+%toc
+
+==多媒体格式分类 ==
+* 多媒体的格式包括三种：封装格式、视频编解码、音频编解码。
+===多媒体封装格式(又称容器）===
+* 所谓封装格式就是将已经编码压缩好的视频轨和音频轨按照一定的格式放到一个文件中，也就是说仅仅是一个外壳，或者大家把它当成一个放视频轨和音频轨的文件夹也可以。 
+* 说得通俗点，视频轨相当于饭，而音频轨相当于菜，封装格式就是一个碗，或者一个锅，用来盛放饭菜的容器。有的人可能觉得奇怪，容器，不就能盛放饭菜就行了么，用一个碗就可以了，何必制定出这么多的格式以及规范呢？ 
+* 其实不然，试想一下，有的菜，例如排骨，比较大，碗放不下，得换锅。有的饭比较烫，也不能放在塑料的容器里，当然个人喜好也有一定关系。所以容器的选择，基本在于，其对视频/音频兼容性，以及适合范围。这下大家应该明白了，很多人一直把封装格式当成视频编码，而这两者之间没有必然的直接联系。
+
+===视频编解码器===
+* 是指一个能够对数字视频进行压缩或者解压缩的程序或者设备。通常这种压缩属于有损数据压缩。历史上，视频信号是以模拟形式存储在磁带上的。随着Compact Disc的出现并进入市场，音频信号以数字化方式进行存储，视频信号也开始使用数字化格式，一些相关技术也开始随之发展起来。
+
+===音频编解码器===
+
+
+==常见的格式介绍==
+===封装格式===
+* MPG 
+    * MPEG 编码采用的容器，具有流的特性。里面又分为 PS，TS 等，PS 主要用于 DVD 存储，TS 主要用于 HDTV。 
+* VOB 
+	* DVD 采用的容器格式，支持多视频多音轨多字幕章节等。 
+* MP4
+	* MPEG-4编码采用的容器，基 于 QuickTime MOV 开发，具有许多先进特性。 
+* 3GP
+	* 3GPP视频采用的格式， 主要用于流媒体传送。 
+* ASF
+	* Windows Media 采用的容器，能够用于流传送，还能包容脚本等。 
+* RM
+	* RealMedia 采用的容器，用于流传送。 
+* MOV
+	* QuickTime 的容器，恐怕也是现今最强大的容器，甚至支持虚拟现实技术，Java等，它的变种 MP4,3GP都没有这么厉害。 
+* MKV
+	* MKV它能把 Windows Media Video，RealVideo，MPEG-4 等视频音频融为一个文件，而且支持多音轨，支持章节字幕等。 
+* OGG
+	* Ogg 项目采用的容器，具有流的特性，支持多音轨，章节，字幕等。 
+* OGM
+	* Ogg 容器的变种，能够支持基于 DirectShow 的视频音频编码，支持章节等特性。 
+* AVI
+	* 最常见的音频视频容器。 
+* NSV
+	* Nullsoft Video 的容器，用于流传送。 
+* WAV
+	* 一种音频容器，大家常说的 WAV 就是没有压缩的 PCM 编码，其实 WAV 里面还可以包括 MP3 等其他 ACM 压缩编码。
+
+====常见格式详细介绍及比较====
+* AVI
+    * AVI是音频视频交错（Audio Video Interleaved）的英文缩写，它是Microsoft公司开发的一种数字音频与视频文件格式，允许视频和音频交错在一起同步播放。
+    * AVI文件的格式是公开并且免费的，大量的视频爱好者在使用这种文件格式。很多PMP唯一能支持的格式就是AVI格式，一般的PMP都带有可以转换其他格式视频成为AVI格式的软件。
+    * AVI文件采用的是RIFF（Resource Interchange File Format，资源互换文件格式）文件结构，RIFF是Microsoft公司定义的一种用于管理windows环境中多媒体数据的文件格式。AVI格式包括2种：AVI 1.0和Open-DML AVI。AVI 1.0为传统的AVI格式，Open-DML AVI是AVI 1.0的扩展。
+
+* ASF
+    * ASF(Advanced Systems Format)是一个开放格式，它能依靠多种协议在多种网络环境下支持数据的传送。ASF是专为在IP网上传送有同步关系的多媒体数据而设计的文件格式，所以ASF格式的信息特别适合在IP网上传输。ASF支持任意的压缩/解压缩编码方式的流媒体，并可以使用任何一种底层网络传输协议，具有很大的灵活性。目前网上以wmv为后缀的文件绝大多数采用的是ASF格式，WMV是微软公司视频编码方式而不是文件格式。
+
+* Mp4，3gp，mov
+    * MP4格式是ISO-IEC Mpeg-4协议Part 14中定义的容器格式。MP4格式实际上是对Apple公司开发的MOV格式(也称Quicktime格式)的一种改进，两种格式差别很小。
+    * MOV格式广泛应用于Mac OS操作系统，在Windows操作系统上也可兼容，但是远比不上AVI格式流行。
+    * 而应用于3G手机上的音视频文件格式——3GP其实是MP4格式的一种简化版本，3GP格式是一种由3GPP组织制定的多媒体容器格式(container format)，3GPP组织形成的通讯协议是目前全世界手机厂商使用最广的，而3GP格式当然也是手机视频格式的绝对主流。
+    * MP4，MOV，3GP格式可以说具有相同的文件结构。
+
+* MKV
+    * 是一种开源的容器格式，目前网上流行的很多高清的视频都是以MKV打包的。 我对这种格式研究的比较深入，由于这种格式出现得比较晚，而且是开源的，所以具有先天的优势，是一种很好的容器格式。
+
+===视频编解码===
+* H.261 
+	* H.261主要在老的视频会议和视频电话产品中使用。H.261是由ITU-T开发的，第一个使用的数字视频压缩标准。实质上说，之后的所有的标准视频编解码器都是基于它设计的。它使用了常见的YCbCr颜色空间，4:2:0的色度抽样格式，8位的抽样精度，16x16的宏块，分块的运动补偿，按8x8分块进行的离散余弦变换，量化，对量化系数的Zig-zag扫描，run-level符号影射以及霍夫曼编码。H.261只支持逐行扫描的视频输入。 
+* MPEG-1第二部分 
+	* MPEG-1第二部分主要使用在VCD上，有些在线视频也使用这种格式。该编解码器的质量大致上和原有的VHS录像带相当，但是值得注意的是VCD属于数字视频技术，它不会像VHS录像带一样随着播放的次数和时间而逐渐损失质量。如果输入视频源的质量足够好，编码的码率足够高，VCD可以给出从各方面看都比VHS要高的质量。但是为了达到这样的目标，通常VCD需要比VHS标准要高的码率。实际上，如果考虑到让所有的VCD播放机都可以播放，高于1150kbps的视频码率或者高于352x288的视频分辨率都不能使用。大体来说，这个限制通常仅仅对一些单体的VCD播放机(包括一些DVD播放机)有效。MPEG-1第三部分还包括了目前常见的*.mp3音频编解码器。如果考虑通用性的话，MPEG-1的视频/音频编解码器可以说是通用性最高的编解码器，几乎世界上所有的计算机都可以播放MPEG-1格式的文件。几乎所有的DVD机也支持VCD的播放。从技术上来讲，比起H.261标准，MPEG-1增加了对半像素运动补偿和双向运动预测帧。和H.261一样，MPEG-1只支持逐行扫描的视频输入。 
+* MPEG-2第二部分 
+	* MPEG-2第二部分等同于H.262，使用在DVD、SVCD和大多数数字视频广播系统和有线分布系统(cable distribution systems)中。当使用在标准DVD上时，它支持很高的图像质量和宽屏；当使用在SVCD时，它的质量不如DVD但是比VCD高出许多。但是不幸的是，SVCD最多能在一张CD光盘上容纳40分钟的内容，而VCD可以容纳一个小时，也就是说SVCD具有比VCD更高的平均码率。MPEG-2也将被使用在新一代DVD标准HD-DVD 和 Blu-ray(蓝光光盘)上。从技术上来讲，比起MPEG-1，MPEG-2最大的改进在于增加了对隔行扫描视频的支持。MPEG-2可以说是一个相当老的视频编码标准，但是它已经具有很大的普及度和市场接受度。 
+* H.263 
+	* H.263主要用在视频会议、视频电话和网络视频上。在对逐行扫描的视频源进行压缩的方面，H.263比它之前的视频编码标准在性能上有了较大的提升。尤其是在低码率端，它可以在保证一定质量的前提下大大的节约码率。 
+* MPEG-4第二部分 
+	* MPEG-4第二部分标准可以使用在网络传输、广播和媒体存储上。比起MPEG-2和第一版的H.263，它的压缩性能有所提高。和之前的视频编码标准的主要不同点在于，“物件導向”(Object-oriented)的编码方法和一些其它并非用于提高通常视频编码压缩率的技术。当然它也引入了一些提高压缩能力的技术，包括一些H.263的技术和1/4像素的运动补偿。和MPEG-2一样，它同时支持逐行扫描和隔行扫描。 
+* MPEG-4第十部分 
+	* MPEG-4第十部分技术上和ITU-T H.264是相同的标准，有时候也被叫做“AVC”)。 这个刚刚制定完成的标准是ITU-T VCEG和ISO/IEC MPEG合作完成的性能最优的视频编码标准，并且在已经得到了越来越多的应用。该标准引入了一系列新的能够大大提高压缩性能的技术，并能够同时在高码率端和低码率端大大超越以前的诸标准。已经使用和将要使用H.264技术的产品包括例如索尼公司的PSP，Nero公司的Nero Digital 产品套装，苹果公司的Mac OS X v10.4，以及新一代DVD标准HD-DVD和蓝光光盘(Blu-ray)。 
+* AVS 
+	* AVS是中国制定的音视频压缩编码标准，故准确来说，其不仅仅包括视频编码标准。它最主要的目的是通过采用与H.264不同的专利授权方式，来避免付出大笔的专利授权费用。在技术上，AVS的视频编码部分采用的技术与H.264非常相似，但采取了一些简化措施。这样做，其一可以回避一些非必要专利，另外据称也可以在几乎不影响编码压缩效率的基础上，提高编解码速度。 
+* DivX，XviD和3ivx 
+	* DivX，XviD和3ivx视频编解码器基本上使用的都是MPEG-4第二部分的技术，以后缀*.avi, *.mp4, *.ogm 或者 *.mkv 结尾的文件有一部分是使用这些视频编解码器的。 
+* WMV 
+	* WMV（Windows Media Video）是微软公司的视频编解码器家族，包括WMV 7、WMV 8、WMV 9、WPV 10。这一族的编解码器可以应用在从拨号上网的窄带视频到高清晰度电视(HDTV)的宽带视频。使用Windows Media Video用户还可以将视频文件刻录到CD、DVD或者其它一些设备上。它也适用于用作媒体服务器。WMV 可以被看作是MPEG-4的一个增强版本。最新的WMV的版本是正在SMPTE制定中的VC-1标准。WMV-9（VC-1，开发代号为“Corona”）刚推出的时候称为VC-9，之后才被电影电视工程师协会(SMPTE)改称为VC-1（VC指Video Codec）。技术上，VC-1也与H.264有诸多相似之处。 
+* RealVideo 
+	* RealVideo是由RealNetworks公司开发的视频编解码器。 
+* Sorenson 3 
+	* Sorenson 3是由苹果公司的软件QuickTime使用的一种编解码器。很多因特网上的QuickTime格式的视频都是这种编解码器压缩的。 
+* Cinepak 
+	* Cinepak同样是由苹果公司的软件QuickTime使用的一种很老的编解码器，好处是即使很老的计算机(如486)也都支援并且能顺利播放。 
+* Indeo Video 
+	* Indeo Video Indeo Video 是由 Intel 所研發的编解码器。
+
+===音频编解码===
+待整理
+
+
+==按照制定者(组织）介绍==
+=== MPEG系列 ===
+* MPEG a （Moving Pictures Experts Group） 运动图象专家组，属于 ISO（International Organization for Standardization） 国际标准组织，他们开发了一系列视频音频编 码，最为大家熟悉的就是 MP3，MPEG-1/2/4。 
+
+* 3.1.1 MPEG-1 
+    * 较早的视频编码，质量 比较差，主要用于 CD-ROM 存储视频，国内最为大家熟悉的就是 VCD（Video CD），他的视频编码就是采用 MPEG-1。 
+
+* 3.1.2 MPEG-2 
+    * 在 MPEG- 1 的基础上开发的一种视频编码，它的质量远远好于 MPEG-1，所以被运用在了 DVD-Video 上面，MPEG-2 是 DVD- Video 唯一指定的视频编码。MPEG-2 不光运用于 DVD-Video ，现在大部分 HDTV（高清电视）也采用 MPEG-2 编码，分辨 率达到了 1920x1080。由于 MPEG-2 的普及，本来为 HDTV 准备的 MPEG-3 最终宣告放弃。 
+
+* 3.1.3 MPEG-4 
+    * 为了应对网络传输等环境，传统的 MPEG-1/2 已经不能适应，所以促使了 MPEG-4 的诞生。MPEG-4 采用了一系列新技术，来满足在低带宽 下传输较高视频质量的需求。DivX，XviD，MS MPEG4 都是采用的 MPEG-4 视频编码，除了在 DVDRip 上面的应 用，3GPP 现在也接纳了 MPEG-4 作为视频编码方案。 
+
+* 3.1.4 MPEG-4 AVC 
+    * 它和 MPEG-4 是两种不同的编码，主要是在极低码率下 MPEG-4 表现并不好，而 AVC 更加适合低带宽传输。在高码率上，AVC 的表现也要 好过 MPEG-4，所以现在大有取代 MPEG-4 的趋势。下一代 HD DVD 和 Blue Ray Disc 已经正式接纳 AVC 为视频编 码方案之一，相信 AVC 的发展前途会非常好。 
+
+* 3.1.5 MPEG Audio Layer 1/2 
+    * 也就是 MP1、MP2 ，较早的音频编码，是 MP3 的前身，主要用于 VCD，DVD，SVCD 的音频编码。 
+
+* 3.1.6 MPEG Audio Layer 3 
+    * 大名鼎鼎的 MP3，已经成为网络音频的主流格式，能在 128kbps 的码率接近 CD 音质。 
+
+* 3.1.7 MPEG-2 AAC 
+    * 在MPEG- 2 上开发的一种新的音频编码，和传统的 MPEG Audio 不兼容，它的质量理论上高于 MP3，并且支持多声道。在 96kbps 的码率范围内 就能接近 CD 音质，比 MP3 更加适合地码率传输。 
+
+* MPEG-4 AAC 
+    * AAC 已经作为 MPEG-4 标准的音频编码，当然 MPEG-4 Audio 还有其他多种音频编码。 
+
+* 3.1.8 MPEG-4 aacPlus 
+    * 采用了 SBR 频带复制技术的 AAC，SBR 技术能够让音频编码降低一半的码率而音质不会有太大改变，已经成为 MPEG-4 标准的一部分。 
+
+* 3.1.9 MPEG-4 VQF 
+    * NTT 开发的一种音频格式，曾经销声匿迹了一段时间，只在 Nero 里面见到过它的身影。现在搭上 SBR 技术又进入了 MPEG-4 标准，似乎不甘心就这 么被遗忘，据说在低比特率下表现比 aacPlus 更好。 
+
+* 3.1.10 mp3PRO 
+    * MP3 加 上 SBR 技术诞生的一种产品，但是并没有得到多大推广，更没有进入标准。 
+
+* 3.1.11 MP3 Surround 
+    * 让MP3 插 上多声道的翅膀，Fraunhofer 开发的又一种 MP3 升级产品，听说 DivX 6 准备将它作为音频编码。Fraunhofer 一直都在围 绕着 MP3 升级，mp3PRO、MP3 Surround，这些产品都能和传统 MP3 兼容，但是随着层出不穷的新编码，不知道 MP3 还能走多 远。
+
+=== DVD系列 ===
+* 说了MPEG，就不能不提这个 MPEG-2 最大受益者 --DVD。当然，这里是指 DVD-Video 和 DVD-Audio，也会涉及一些HD DVD。DVD 的编码都属于应用级的，它们自己并不开发 编码，这一点要和 MPEG 区别开来。 
+
+* 3.2.1 Dolby Digital AC3 
+    * DVD 事实上 的音频编码标准，现在所有的 DVD 都采用它压缩音频，提供了最大 5.1 声道的输出支持，能在有限的空间存储高质的音频。 
+
+* 3.2.2 Dolby Digital Plus 
+    * 下 一代 HD DVD 的音频编码，是 AC3 的升级版本，支持 7.1 甚至更多的声道，码率范围也有大幅提升。 
+
+* 3.2.3 MLP Lossless 
+    * HD DVD 上 的无损音频编码，同样为 Dolby 公司开发，最高采样能达到 192KHz，也为 DVD-Audio 的音频编码标准。 
+
+* 3.2.4 DTS 
+    * DTS 最 初是为电影院开发的音频系统，后来才应用于 DVD 中。它是 AC3 的有力竞争者，不过在 DVD 中只有 D9 才能够看到他的身影，虽然广大发烧 友都在鼓吹它的效果超过 AC3，但是测试出来并不如想象中的那么好，特别是高频方面不及 AC3。 
+
+* 3.2.5 DTS-HD 
+    * 下 一代 HD DVD 的音频编码，它和 Dolby Digital Plus 都被指定为强制编码，看来在未来会和 Dolby 平分秋色。 
+
+* 3.2.6 LPCM 
+    * 没有压缩的 PCM 编码，只能存储两声道，但是采样率能够高达 96KHz，是 DVD-Video 中音质最好的一种，当然体积也是最大的。 
+
+* 3.2.7 MPEG Audio 
+    * 主要是 MP2，应用于 PAL 制式的 DVD，压缩率高，支持多声道（MPEG-2 规范都支持多声道）。 
+
+* 3.2.8 DSD 
+    * 这个似乎扯远了，不过作为 DVD-Audio 的最大竞争对手 SACD，顺带介绍一下。DSD（Direct Stream Digital）直接比特 流数字，由 Sony 推出，能够避免传统 PCM 编码的弊端，达到非常高的品质。最高采样和 DVD-Audio 一样，192KHz。
+
+=== H.26X 系列 ===
+* “ITU（International Telecommunication Union）国际电传视讯联盟”主 导的编码系列，主要应用于实时视频通信领域，如会议电视等。由于现在 MPEG 系列也开始向这个领域进军，所以这两个组织也开始了密切的合作，如最近热 门的 AVC/H.264，就是由 ITU 旗下的“VCEG（Video Coding Experts Group）视频编码专家组”和 “ISO（International Organization for Standardization）国际标准组织”旗下的 “MPEG （Moving Pictures Experts Group）运动图象专家组”联合制作发布的。 
+
+* 3.3.1 H.261 
+    * H.261 是ITU-T为在综合业务数字网(ISDN)上开展双向声像业务(可视电话、视频会议)而制定的，它是最早的运动图像压缩标准，它详细制定了视频编码的各 个部分，包括运动补偿的帧间预测、DCT变换、量化、熵编码，以及与固定速率的信道相适配的速率控制等部分。 
+
+* 3.3.2 H.263 
+    * H.263 是ITU-T为低于64kb/s的窄带通信信道制定的视频编码标准，它是在H.261基础上发展起来的。 
+
+* 3.3.3 H.263+ 
+    * H.263 的 第二个版本，加入了许多新技术来扩展 H.263 的应用范围。 
+
+* 3.3.4 H.263++ 
+    * 在 H.263+ 上 增加了几个选项，来增强码流在恶劣信道上的抗误码性能，同时提高增强编码效率。 
+
+* 3.3.5 H.264 
+    * 也 就是前面提到的 MPEG-4 AVC。H.264是由ISO/IEC与ITU-T组成的联合视频组(JVT)制定的新一代视频压缩编码标准。在ISO /IEC中该标准命名为AVC (Advanced Video Coding)，作为MPEG-4标准的第10个选项；在ITU-T中正式命名为 H.264标准。 
+
+* 3.3.6 3GPP 
+    * 现在通讯领域最热门的话题之一，既然说 了 MPEG 和 ITU，和这两个千丝万缕的 3GPP 应用就不得不提了。3GPP 的视频采用了 MPEG-4 和 H.263 两种编码，可能还 将加入 H.264，音频方面音乐压缩采用 AAC，语音则采用先进的 AMR，另一个 aacPlus 随着 V2 版本的推出，底码率下的效果更加突 出，也有望加入标准。
+
+=== Windows Media系列 === 
+* Microsoft 公司主导 的音频视频编码系列，它的出现主要是为了进行网络视频传输，现在已经向 HDTV 方面进军，开发了 WMV HD 应用。 
+
+* 3.4.1 Microsoft MPEG-4 v1/v2/v3 
+    * 最 早的 ASF 采用的视频编码，基于 MPEG-4 技术开发，DivX3.11 就是基于 Microsoft MPEG-4 v3 破解出来的，后来 才进行了重写。 
+ 
+* 3.4.2 Windows Media Video 7 
+    * Microsoft 正式开发的 第一个 Windows Media Video，开始脱离了 MPEG-4，和 MPEG-4 不兼容，从这一点上可见微软的野心。可惜这个版本压缩效 果非常烂，打破了微软一飞冲天的美梦，不过它在压缩速度上非常快，现在网络上有很多采用这种格式压缩的 WMV。 
+
+* 3.4.3 Windows Media Video 8 
+    * 在 WMV7 基 础上改进的版本，质量上面进不了不少。 
+
+* 3.4.4 Windows Media Video 9 
+    * 微软的重 头戏，不光是这一个编码，V9 系列更是一个平台，让微软有足够的能力挑战 MPEG，ITU 等标准化组织。虽然这个版本并没有微软吹得那么厉害，特别 是低码率下比较差，不过跟以前版本相比进步还是非常多的。特别是 WMV HD 的应用，让微软也跻身视频标准领域。 
+
+* 3.4.5 Windows Media Video 9 Professional 
+    * WMV HD 应 用的编码，和 WMV9 兼容，在高比特率上进行了优化，画面非常优秀。（不过几十M的码率能不优秀吗？全是体积换来的。） 
+
+* 3.4.6 Windows Media Video 9 Advanced Profile 
+    * 随 着 Windows Media Player 10 推出的编码器，能够更进一步控制 WMV9 的质量。但是不能在老版本的 WMP9 上播放，也就 是不兼容老版本的 WMP9，真不知微软在搞什么？ 
+
+* 3.4.7 Windows Media Video 9 Screen 
+    * 静 态屏幕无损压缩编码，质量非常好，压缩率高，只针对如屏幕等变化非常小的环境。 
+
+* 3.4.8 Windows Media Video 9 Image 
+    * 静 态图像压缩编码。 
+ 
+* 3.4.9 Windows Media Audio v1/v2 
+    * 微软最早的音频编码技 术，用于 ASF 中，后来被破解也用在 DivX Audio 中，质量比较差。 
+
+* 3.4.10 Windows Media Audio 7/8/9 
+    * 随 着各种不同的 WMV 而推出的相应的音频编码，质量节节提升，不过还没有达到 64kbps CD音质的神化。 
+
+* 3.4.11 Windows Media Audio 9 Professional 
+    * WMA9 中 出现的新编码，主要用于多声道编码和高采样率音频的编码，质量不错。 
+
+* 3.4.12 Windows Media Audio 9 Voice 
+    * 针 对语音的编码，最高 20kbps ，不过和 AMR 相比，效果就太差了。 
+
+* 3.4.13 Windows Media Audio 9 Lossless 
+    * 无 损音频编码，可以完美保留CD原质量，是CD备份的不错选择，不过代价是体积过大。
+
+===RealMedia系列===
+* RealNetworks 所 开发的系列编码技术，也是主要用于网络传输，在底码率下表现不错。 
+* 3.5.1 RealVideo G2 
+	* 早 期的 RealVideo 编码，质量比较糟糕，不过那时在网络上算是很先进了，毕竟当时能用网络看视频的人不多。 
+* 3.5.2 RealVideo 8 
+	* 随 着 RealPlayer 8 推出的视频格式，是现在主流的网络视频编码之一。编码速度较慢，质量也只能算一般。 
+* 3.5.3 RealVideo 9 
+	* RealNetworks 开 发的新一代编码，质量进步了很多，特别是在底码率下，而且编码速度很快，做到了速与质的很好统一。 
+* 3.5.4 RealVideo 10 
+	* 在 RealVideo 9 基 础上加入了一些参数，如 EHQ 等，更加精确控制码率，和 RealVideo 9 兼容。 
+* 3.5.5 RealAudio Cook 
+	* 早 期的音频编码，但是在现在看来，仍然质量不错，可惜最高码率 96kbps。应用到了两代音频编码中：RealAudio G2、 RealAudio 8。 
+* 3.5.6 RealAudio Cook Multichannel 
+	* Cook 的 改进版本，增加了5.1声道的支持，应用到了 RealAudio 10 Multichannel 中。 
+
+* 3.5.7 RealAudio Sipro 
+	* 采 用了 Sipro 语音编码技术，主要针对语音编码，应用在更早期的 RealAudio 4.0、RealAudio 5.0 中。 
+* 3.5.8 RealAudio ATRAC3 
+	* Sony 公 司开发的 ATRAC3 编码，被 RealNetworks 公司购买过来应用到了 RealAudio 8 中，以弥补 Cook 高码率上的不足。 
+* 3.5.9 RealAudio AAC 
+	* AAC音频编码，用于 RealAudio 10 中。 
+* 3.5.10 RealAudio aacPlus 
+	* aacPlus 音 频编码，用于 RealAudio 10 中，不过并没有随 RealProducer 发行，需要单独购买。 
+* 3.5.11 RealAudio Lossless 
+	* 无 损音频编码。
+
+===QuickTime系列===
+* QuickTime 并不是一个编码，而是一个多媒体平台，它的上面有众多编码，这里只介绍几个主流的编码器。 
+* 3.6.1 Sorenson Video 2 
+	* Sorenson Media 公 司开发的编码器，主要用于 QuickTime 4 的视频编码，质量较差。 
+* 3.6.2 Sorenson Video 3 
+	* Sorenson Media 公 司随 QuickTime 5 发布的编码器，质量很不错，已经成为 QuickTime 的标准视频编码，网络上大部分电影预告片都采用这种编码。 
+* 3.6.3 Apple MPEG-4
+	* Apple 公 司自己开发的 MPEG-4 编码器，随 QuickTime 6 发布，质量很差。 
+* 3.6.4 Apple H.264 
+	* Apple 公 司自己开发的 H.264 编码器，随 QuickTime 7 发布，支持 HDTV。 
+* 3.6.5 QDesign Music 1 
+	* QDesign 公 司开发的音频编码器，这个版本现在已经开不到它的身影了。 
+*3.6.6 QDesign Music 2 
+	* QDesign Music 的 第二个版本，也是最后一个版本，在时下这些先进的音频编码面前，它已经没有生命力了，主要应用于网上的电影预告片。 
+* 3.6.7 Qualcomm PureVoice 
+	* Qualcomm 公 司开发的语音编码器，质量不错。 
+* 3.6.8 Apple MPEG-4 AAC 
+	* Apple 公司自己开发 的 AAC 编码器，质量非常好，是最优秀的 AAC 编码器之一，随 QuickTime 6 发布。 
+* 3.6.9 AMR Narrowband 
+	* AMR 语音编码器，这个版本只支持 AMR-NB。 
+
+* 3.6.10 Apple Lossless 
+	* Apple 公司开发的无损音频编码，主要应用于 iTunes 抓取 CD。
+=== Ogg系列 ===
+* Ogg 是 Xiph.org 基 金会发起的一个开放源代码项目，包括视频音频，服务器，传输系统，客户端，硬件支持等，最为大家熟悉的就是音频 Ogg Vorbis，它被认为是迄今为 止 128kbps 码率上最好的编码器。 
+* 3.7.1 Ogg Theora 
+    * Ogg 的视频编码，基于On2 VP3 开发，现在还处于测试阶段。 
+* 3.7.2 Ogg Vorbis
+	* Ogg 的音频编码， 质量非常优秀，特别是低码率下，支持多声道。最高码率能够达到 500kbps，是 AAC 的有力竞争者。 
+* 3.7.3 Ogg Speex 
+	* Ogg 的 语音编码，专门针对低码率的语音编码。 
+* 3.7.4 Ogg FLAC
+	* gg 的无损音频编码。
+=== On2 VPX 系列 ===
+* On2 公司开发了一系列优秀的视频编码，现在应用得最多的恐怕是 Nullsoft Video 的视频，它们 就采用了 VP3，VP5，VP6 视频编码。 
+* 3.8.1 VP3 
+	* 已经作为开放源代码公布，现在是Ogg Theora项目，当然，Theora 的质量可比 VP3 好多了。 
+* 3.8.2 VP4 
+	* On2公司当年吹牛全球最好的视频编码，后来证明质量很一般。 
+* 3.8.3 VP5 
+	* 至今还很神秘，On2并没有放出来，只在 Nullsoft Video 里面见到他的身影。 
+
+* 3.8.4 VP6 
+	* 从一开始，On2 就把这个编码器提供给大家下载，质量还是不错的。不过最近似乎又关闭了，主页上只有一个解码器。 
+* 3.8.5 VP7 
+	* On2 最新的编码器，在 VP6 上有不少进步。 
+* 3.8.6 Flash Video 
+	* Macromedia 公司推出的多媒体格式，主要用于在 Flash 中压缩视频。视频采用 Sorenson 公司的 Spark 编码器，音频采用 MP3，质量比较差。传 闻下一代 Flash Video 准备使用 On2 VP6 ，那将让视频质量得到一个量的提升。
+
+==MPEG完整介绍==
+	我这有本书，刘德峰的《多媒体技术基础》，介绍得比较好，感兴趣的可以来看。
+
+==参考文献==
+* http://blogold.chinaunix.net/u/23367/showart_319058.html
+* http://zh.wikipedia.org/zh/%E8%A6%96%E8%A8%8A%E7%B7%A8%E8%A7%A3%E7%A2%BC%E5%99%A8
+* http://blog.sina.com.cn/s/blog_4a946a310100drnl.html
+
+==Mp4容器格式相关的BLOG介绍==
+* http://blog.sina.com.cn/s/blog_48f93b530100jz4b.html
+* http://blog.sina.com.cn/s/blog_48f93b530100jz4x.html
+* http://www.52rd.com/Blog/wqyuwss/559/
