@@ -1,0 +1,59 @@
+%title 常用代码及其存放位置备忘
+=常用代码及其存放位置备忘=
+%toc
+
+==错误值==
+===文件汇总===
+# external/kernel-headers/original/asm-generic/error-base.h
+# external/kernel-headers/original/asm-generic/error.h
+# frameworks/native/include/utils/Errors.h
+# frameworks/av/include/media/stagefright/MediaErrors.h
+# frameworks/av/include/drm/drm_framework_common.h
+# External/chromium/net/base/net_error_list.h
+
+===详细介绍===
+* external/kernel-headers/original/asm-generic/error-base.h
+    * 标准的Linux错误值
+    * 范围 1 ~ 34
+
+* external/kernel-headers/original/asm-generic/error.h
+    * 同上， 范围 35 ~ 131
+
+* frameworks/native/include/utils/Errors.h
+    * OK, NO_ERROR: 0
+    * 其余的错误值，基本是以负基本Linux错误值的原则定义的
+
+* frameworks/av/include/media/stagefright/MediaErrors.h
+    * MediaErrors: -1000 ~ -1014
+    * DRM
+        * -2000 ~ -2007
+        * DRM_VENDOR: -2500 ~ -2999
+        * DRM_WV_VENDOR: 同上
+
+* frameworks/av/include/drm/drm_framework_common.h
+    * 同上的DRM部分，需要与它同步更新
+    * -2000 ~ -2007
+
+* External/chromium/net/base/net_error_list.h
+    * HTTP连接时，出错的错误值。
+    * ChromiumHTTPDataSource类中就用到了
+
+==基础类库==
+
+* Native层通用类库
+    * 代码位置
+        * frameworks/native/include/utils/
+        * frameworks/native/libs/utils/
+    * 详细介绍
+        * RefBase, Looper, Thread, Mutex, Condation, RWLock, 
+        * Debug, Log, Trace,
+        * List, Vector, KeyVector, StoredVector,  PropertyMap, String8, String16, StringArray, 
+        * ShareBufer, BitSet, BlobCache, Singleton, Unicode, 
+        * ZipFile
+* MultiMedia层通用类库
+    * 代码位置
+        * frameworks/av/include/media/stagefright/foundation/
+        * frameworks/av/media/stagefght/foundation/
+    * 详细介绍
+        * AHandler, ALooper, AMessage, ABuffer
+        * AString: 仿标准库中的std::string， 很好用
