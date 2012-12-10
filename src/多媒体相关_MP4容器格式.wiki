@@ -1,0 +1,34 @@
+%title MP4容器格式
+=MP4容器格式=
+%toc
+
+==格式解析文章==
+* [[http://blog.csdn.net/zzqhost/article/details/8275518|MP4容器格式分析1]]
+* [[http://blog.csdn.net/zzqhost/article/details/8275457|MP4容器格式分析2]]
+* [[http://blog.csdn.net/zzqhost/article/details/8275467|H264—MP4格式及在MP4文件中提取H264的SPS、PPS及码流]]
+* [[http://www.52rd.com/Blog/wqyuwss/559/|wqyuwss的专栏]]
+
+==资源下载及参考地址==
+* [[http://mp4ra.org/atoms.html|Box类型列表]]
+* [[http://standards.iso.org/ittf/PubliclyAvailableStandards/index.html|官方标准文档下载]]
+
+
+==MP4相关的容器格式介绍==
+===MOV===
+* MOV即QuickTime影片格式，它是Apple公司开发的一种音频、视频文件格式，用于存储常用数字媒体类型。当选择QuickTime（*.mov）作为“保存类型”时，动画将保存为.mov文件。
+* MP4容器格式就是以MOV为基础，然后由那个某某某组织重新定义了一下。
+
+===3GP===
+* 3GP是一种3G流媒体的视频编码格式，使用户能够发送大量的数据到移动电话网络，从而明确传输大型文件，如音频，视频和数据网络的手机。3GP是MP4格式的一种简化版本，减少了储存空间和较低的频宽需求，让手机上有限的储存空间可以使用。
+* 3GP是MP4格式的一种简化版本，减少了储存空间和较低的频宽需求，让手机上有限的储存空间可以使用。
+* 目前3GP档案有两种不相同的标准：
+    * 3GPP（针对GSM手机，扩展名为.3gp）
+    * 3GPP2（针对CDMA手机，扩展名为.3g2）
+    * 这两种格式影像方面都采用MPEG-4及H.263，而声音则采用AAC或AMR标准。
+* 结论：3GP是缩水版的MP4格式，主要应用于3G网络。
+
+===M4V===
+* M4V是一种应用于网络视频点播网站和移动手持设备的视频格式，是MP4格式的一种特殊类型，其后缀常为.MP4或.M4V，其视频编码采用H264，音频编码采用AAC。
+* M4V 是一个标准视频文件格式，由苹果公司创造。此种格式为 iPod 、 iPhone 和 PlayStation Portable 所使用，同时此格式基于 MPEG-4 编码第二版。
+* MP4最早期是一种应用于移动手持设备的格式，作为MP4的特殊类型，M4V是MP4格式高清的代表，应用于移动手持设备，又称为MP4-AVC
+* 结论： M4V是MP4的高清版本，是一种特殊类型的MP4格式。
