@@ -10,6 +10,7 @@
 
 ==资源下载及参考地址==
 * [[http://mp4ra.org/atoms.html|Box类型列表]]
+* [[http://www.ftyps.com/|Ftyps列表]]
 * [[http://standards.iso.org/ittf/PubliclyAvailableStandards/index.html|官方标准文档下载]]
 
 
