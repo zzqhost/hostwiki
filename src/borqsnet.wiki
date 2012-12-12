@@ -1,0 +1,102 @@
+%title Borqs相关的一些资源
+=Borqs相关的一些资源=
+%toc 目录
+
+==Mantis & Gerrit & TestLink 等==
+| [[https://borqsbt.borqs.com/|BorqsBT]]            | [[https://borqsbt2.borqs.com/|BorqsBT2]]   | [[https://borqsbtx.borqs.com/|BorqsBTX]]                     |
+| [[https://bkbgerrit.borqs.com/gerrit|BKB Gerrit]] | [[http://192.168.1.250/gerrit|Art Gerrit]] | [[https://gerrit.ibbprof.com/gerrit2/|PPD Gerrit]]           |
+| [[https://borqstm.borqs.com/|TestLink]]           | [[https://borqstm2.borqs.com/|TestLink2]]  | [[https://borqstmx.borqs.com/|TestLinkX]]                    |
+| [[http://192.168.1.249/|How to]]                  | [[http://192.168.1.66/borqs/|公司内网]]    | [[http://bpc.borqs.com/elearning/elearning_index.html|梧桐]] |
+
+
+== Borqs网络资源 ==
+ 
+=== IT部门发布的地址 ===
+* http://192.168.1.66
+
+
+===Linux下的共享资源 ===
+* 用户名密码：
+    * internal_user
+    * Don't_distribute_this_password_out_of_Borqs
+* *250共享:*  http://192.168.1.250/share/
+* *工具共享:*  http://192.168.1.250/share/linux
+* *SDK地址：*  http://192.168.1.250/share/cm/_stable_release/OMS2.6/
+* *DailyBuild:*  http://192.168.1.8/share/cm/
+
+
+=== Windows 共享资源 ===
+* 用户名密码
+    * guest
+    * guest
+
+* 连接方式
+    * 打开文件管理器，按下Ctrl+L在地址中输入 smb://192.168.5.186
+
+* test组的常用地址
+    * smb://192.168.5.186/
+    * smb://192.168.5.186/testreport
+    * *CTS源码：*  smb://192.168.5.186/testreport/Auto_Test_Support/CTS/source_code/cts_4.1_r1/cts/tests/tests/media/src/android/media/cts/MediaPlayerTest.java
+    * *[隐藏的Intel共享]*  smb://192.168.5.186/intel
+     
+
+=== 流媒体测试内网地址 ===
+    * *Borqs内部的测试网址：* [[http://borqstom.borqs.com/browser/]]
+    * *Borqs内部的DRM下载网址：* [[http://borqstom.borqs.com/drm/]]
+    * *Orange test server:* http://www.ftgroup-devices.com/index_php.php
+
+{{{ 
+  As we talked, we'd like to know the status of all streaming links on Orange test site based on latest R3 build. Please help to arrange resource to verify.
+ 
+  Here are the test resource info,
+Orange test server link, http://www.ftgroup-devices.com/index_php.php
+username: 972759
+password: 143737
+  Test cases for RTSP(normal&SDP) and HTTP progressive download(normal& SDP) are all under section, PacketVideo Server  . 
+HTTP live streaming test case are under section, HLS(Http live streaming) Server . 
+ 
+  Please note that all of these test need to be done with China Unicom 3G SIM card, otherwise we'll get errors. 
+}}}
+
+
+== Borqs代码地址 ==
+
+=== 160服务器(BKB & RHB) ===
+* *HowTo:*  http://192.168.1.249/OSS/Gerrit/Gerrit_Quick_Start
+* Intel项目的地址快速参考
+    * `repo init -u ssh://192.168.1.160:29418/a/borqsmanifest -b devr4`
+
+=== 250服务器(Art项目) ===
+* 代码下载
+    * *HowTo:*  http://192.168.1.249/OSS/Gerrit/Gerrit_Quick_Start
+    * `repo init -u ssh://192.168.1.250:29418/platform/engmanifest -m art/ART_M1-dev.xml`
+* 权限查询
+    * `svn://192.168.1.120/doc/branches/borqs/acl`
+* 权限Manifest修改
+    * `git clone ssh://b649@192.168.1.250:29418/platform/engmanifest`
+
+=== PPD-YB ===
+* 此项目的下载代码地址是Borqs内部的地址，而上传代码(Gerrit)是PPD（美国）地址。
+* 代码下载
+    * `repo init -u ssh://b649@192.168.1.160:29418/a/ppdmanifest -b ppd/yb`
+* Gerrit地址
+    * https://gerrit.ibbprof.com/gerrit2/
+
+=== SVN ===
+* svn checkout 地址
+* 多媒体有权限的一些库
+    * `svn://192.168.1.120/oms/branches/goat`
+	* `svn://192.168.1.120/oms/branches/horse`
+	* `svn://192.168.1.120/mod/branches/filemanager`
+	* `svn://192.168.1.120/mod/branches/camera`
+	* `svn://192.168.1.120/mod/branches/soundrecorder`
+	* `svn://192.168.1.120/mod/branches/video`
+	* `svn://192.168.1.120/mod/branches/streamingplayer`
+	* `svn://192.168.1.120/doc/branches/borqs/acl`
+
+
+== Wifi密码 ==
+* Common
+    * see2Eemo
+* VOIP
+    * 12345678
