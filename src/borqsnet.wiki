@@ -64,7 +64,8 @@ HTTP live streaming test case are under section, HLS(Http live streaming) Server
 === 160服务器(BKB & RHB) ===
 * *HowTo:*  http://192.168.1.249/OSS/Gerrit/Gerrit_Quick_Start
 * Intel项目的地址快速参考
-    * `repo init -u ssh://192.168.1.160:29418/a/borqsmanifest -b devr4`
+    * `repo init -u ssh://b649@192.168.1.160:29418/a/borqsmanifest -b borqs/devr4`
+    * `repo init -u ssh://b649@192.168.1.160:29418/a/borqsmanifest -b borqs/devr3w32`
 
 === 250服务器(Art项目) ===
 * 代码下载
