@@ -1,15 +1,14 @@
 %title Borqs相关的一些资源
 =Borqs相关的一些资源=
-%toc 目录
 
 ==Mantis & Gerrit & TestLink 等==
 | [[https://borqsbt.borqs.com/|BorqsBT]]            | [[https://borqsbt2.borqs.com/|BorqsBT2]]   | [[https://borqsbtx.borqs.com/|BorqsBTX]]                     |
-| [[https://bkbgerrit.borqs.com/gerrit|BKB Gerrit]] | [[http://192.168.1.250/gerrit|Art Gerrit]] | [[https://gerrit.ibbprof.com/gerrit2/|PPD Gerrit]]           |
+| [[http://192.168.1.250/gerrit|Art Gerrit]] | [[https://gerrit.ibbprof.com/gerrit2/|PPD Gerrit]] | [[https://bkbgerrit.borqs.com/gerrit|BKB Gerrit]]         |
 | [[https://borqstm.borqs.com/|TestLink]]           | [[https://borqstm2.borqs.com/|TestLink2]]  | [[https://borqstmx.borqs.com/|TestLinkX]]                    |
 | [[http://192.168.1.249/|How to]]                  | [[http://192.168.1.66/borqs/|公司内网]]    | [[http://bpc.borqs.com/elearning/elearning_index.html|梧桐]] |
 
 
-== Borqs网络资源 ==
+== Borqs网络资源 [[==]]
  
 === IT部门发布的地址 ===
 * http://192.168.1.66
