@@ -1,0 +1,75 @@
+%title Ubuntu下编译安装OpenCV并配置QTCreater
+=Ubuntu下编译安装OpenCV并配置QTCreater=
+%toc
+
+==编译安装==
+* 首先在终端运行下列命令进行必要的编译环境安装
+    * $ sudo apt-get install build-essential libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg62-dev libtiff4-dev cmake libswscale-dev libjasper-dev
+
+* 下载相应的版本到电脑里面，这里我们以下载OpenCV-2.4.3为例
+* 解压并配置编译环境
+    * 解压 OpenCV-2.3.1.tar.bz2
+    * $ cd OpenCV-2.3.1
+    * $ mkdir build 
+    * $ cd build
+    * $ cmake ..  (此处为cmake空格后面两个点,即上级目录, 你懂的....)
+* 编译安装
+    * make
+    * sudo make install
+* 安装后的路径为: (可以在cmake那一步观察到)
+    * /usr/local/include/opencv/
+    * /usr/local/include/opencv2/
+    * /usr/local/lib/
+
+* 配置必要的库
+    * sudo gedit /etc/ld.so.conf.d/opencv.conf
+    * 添加这句命令到文件中，文件或许是空的，不影响.    /usr/local/lib/
+
+*  运行此命令
+    * $ sudo ldconfig
+
+* 现在运行这条命令 sudo gedit /etc/bash.bashrc，添加下面两行到文件的末尾并保存。
+    # PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+    # export PKG_CONFIG_PATH
+* 运行完毕后，需要注销一下系统，否则设置不会生效。
+* 注销归来，opencv已经安装成功了
+
+==配置QTCreater并运行例程测试==
+* 将opencv库加入到qtcreator里
+    * $ sudo gedit /usr/share/qt4/mkspecs/default/qmake.conf
+    * 在文件内添加了下面两句：
+        # QMAKE_INCDIR = /usr/include/opencv 
+        # QMAKE_LIBS = -lcvaux -lcv -lcxcore -lhighgui -lml
+* 新建QT工程, 在这里我建了一个纯C++的工程取名为testopencv.
+* 在testopencv.pro文件内添加：
+{{{
+INCLUDEPATH += /usr/local/include/opencv
+LIBS += \
+/usr/local/lib/libopencv_core.so \
+/usr/local/lib/libopencv_highgui.so \
+/usr/local/lib/libopencv_ml.so
+}}}
+
+* 输入以下代码,编译运行
+{{{
+
+#include <iostream>
+
+#include <cv.h>
+#include <highgui.h>
+
+using namespace std;
+
+int main()
+{
+    IplImage *img = 0;
+    img = cvLoadImage("/home/zzq/Desktop/test2.jpg", -1);
+    cvNamedWindow("test", CV_WINDOW_NORMAL);
+    cvShowImage("test", img);
+    cvWaitKey(0);
+    return 0;
+}
+
+}}}
+
+* 注: 在网上,有文章说可以把 pro文件中的配置放到 qmake.conf 中, 但是我试过,没有成功, 可能是放的配置文件不正确,或者是写法不正确, 有空了再研究一下.

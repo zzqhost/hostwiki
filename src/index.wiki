@@ -4,7 +4,7 @@
 
 
 * *程序设计_C/C++*
-
+| [[程序设计_C&C++_Ubuntu下编译安装OpenCV并配置QTCreater|Ubuntu下编译安装OpenCV并配置QTCreater]] |
 
 * *程序设计_Java*
 
