@@ -1,5 +1,5 @@
 %title QTCreater调试时提示ptrace不允许的操作
-
+[[index|首页]]
 =QTCreater调试时提示ptrace不允许的操作=
 
 %toc

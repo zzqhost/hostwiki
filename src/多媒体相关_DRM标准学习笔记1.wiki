@@ -1,5 +1,5 @@
 %title DRM标准学习笔记1
-
+[[index|首页]]
 =DRM标准学习笔记1=
 %toc
 

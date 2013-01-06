@@ -1,4 +1,5 @@
 %title TestOrangeLink
+[[index|首页]]
 =TestOrangeLink=
 %toc
 
