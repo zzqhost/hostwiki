@@ -43,6 +43,7 @@
     * *Borqs内部的测试网址：* [[http://borqstom.borqs.com/browser/]]
     * *Borqs内部的DRM下载网址：* [[http://borqstom.borqs.com/drm/]]
     * *Orange test server:* http://www.ftgroup-devices.com/index_php.php
+    * *RTSP直播流-监控摄像头:* http://218.204.223.237:8081/wap/show_video.php?vd=1
 
 {{{ 
   As we talked, we'd like to know the status of all streaming links on Orange test site based on latest R3 build. Please help to arrange resource to verify.
