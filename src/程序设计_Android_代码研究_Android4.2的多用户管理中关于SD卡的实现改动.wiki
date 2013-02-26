@@ -1,0 +1,48 @@
+[[首页]]
+
+%title Android4.2的多用户管理中关于SD卡的实现改动=
+=Android4.2的多用户管理中关于SD卡的实现改动=
+%toc
+
+==问题==
+    * Android4.2中,通过类得到的SD卡路径类似 /storage/emulated/0 在adb shell中看不到,也不能访问.
+	* MediaServer不能访问这样的路径.　/storage/emulated/0/
+	* libstagefright中原先可以正常读写的SD卡路径,现在由于以上原因不能用了.
+    * 另外:　还有一个权限问题,本文不进行讨论,但它是现实存在的,由于它的存在,导致即使程序中写死实际的挂载点,它也会提示没有权限.
+
+==Android4.2中对SD卡Mount的实现==
+===在init.rc中创建挂载点路径,及定义环境变量===
+{{{ # See storage config details at <a href="http://source.android.com/tech/storage/">http://source.android.com/tech/storage/</a>
+mkdir /mnt/shell/emulated 0700 shell shell
+mkdir /storage/emulated 0555 root root
+ 
+export EXTERNAL_STORAGE /storage/emulated/legacy
+export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+export EMULATED_STORAGE_TARGET /storage/emulated
+ 
+# Support legacy paths
+symlink /storage/emulated/legacy /sdcard
+symlink /storage/emulated/legacy /mnt/sdcard
+symlink /storage/emulated/legacy /storage/sdcard0
+symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+  }}}
+
+* 其中创建的两个如下目录
+    * /mnt/shell/emulated/　是实际要挂载sdcard的目录
+    * /storage/emulated/ 是每个用户为它们自己挂载sdcard的目录.
+* SD卡实际挂载到的是 /mnt/shell/emulated/0, 其它的 /storage/emulated/legacy, /sdcard/, /mnt/sdcard/, /storage/emulated/legacy都是它的链接.
+
+===进程内的不共享的挂载点===
+* linux 内核命名空间,　在Linux 2.6之后引入了一个新的技术 unshare, 它可以使某个应用程序创建的挂载点等不共享,只有自己可见.
+* dalvik_system_Zygote.cpp中的mountEmulatedStorage()函数.　会在Zygote创建一个新的java进程时运行,　先应用 unshare , 然后再以 MS_BIND参数把 /mnt/shell/emulated/0 再挂载到 /storage/emulated/0 下.　　   (dalvik/vm/native)
+* 其中的0是用户ID, 计算方法是 UID/100000, 代码在 system/core/libcutils/multiuser.c中.　　所以在这里的多用户,即是给每个用户一个UID段,　0 即为主用户.　新建的用户往后排. 它们拥有各自的　UID 段.
+* 在Environment中通过一样的方法计算得到　external storage路径,　即 /storeage/emulated/0.     (/frameworks/base/core/java/android/os)
+
+==多用户访问SD卡实现模式==
+* 每个用户拥有各自的应用程序,　第二个用户想安装想同的应用时,　系统会进行模拟安装 (来源自网上介绍文章)
+* 在应用程序创建时,会创建一个它自己能访问的SD卡挂载点 /storeage/emulated/[userid].
+* Mediaserver等不是通过Zygote创建的native程序,　不会创建 /storage/emulated/* 挂载点,所以就不能直接访问应用程序传下来的SD路径.
+* adb shell 也不是通过 Zygote 来创建的,　也没有此挂载点,　所以不能访问 /storage/emulated/*
+
+==遗留问题==
+* 应用程序创建的 /storage/emulated/0 路径(空路径,未挂载的目录)　为什么通过 adb shell 看不到呢, 通过什么手段隐藏的?

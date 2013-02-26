@@ -14,7 +14,8 @@
 
 
 * *程序设计_Android_代码研究*
-| [[程序设计_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]] | [[程序设计_Android_代码研究_HTTP-progressive-streaming分析|HTTP progressive streaming分析]] | [[程序设计_Android_代码研究_常用代码及其存放位置备忘|常用代码及其存放位置备忘]] | [[程序设计_Android_代码研究_Android中使用第三方库|Android中使用第三方库]] |
+| [[程序设计_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]]                                              | [[程序设计_Android_代码研究_HTTP-progressive-streaming分析|HTTP progressive streaming分析]] | [[程序设计_Android_代码研究_常用代码及其存放位置备忘|常用代码及其存放位置备忘]] | [[程序设计_Android_代码研究_Android中使用第三方库|Android中使用第三方库]] |
+| [[程序设计_Android_代码研究_Android4.2的多用户管理中关于SD卡的实现改动|Android4.2的多用户管理中关于D卡的实现改动]] |                                                                                             |                                                                                 |                                                                           |
 
 * *程序设计_IDE配置*
 | [[程序设计_IDE配置_QTCreater调试时提示ptrace不允许的操作|QTCreater调试时提示ptrace不允许的操作]] |
