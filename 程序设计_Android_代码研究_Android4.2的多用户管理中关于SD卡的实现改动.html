@@ -30,6 +30,7 @@
 </ul>
 <li><a href="#toc_1.3">3. 多用户访问SD卡实现模式</a>
 <li><a href="#toc_1.4">4. 遗留问题</a>
+<li><a href="#toc_1.5">5. 最终答案</a>
 </ul>
 </ul>
 </div>
@@ -121,6 +122,88 @@ adb shell 也不是通过 Zygote 来创建的,　也没有此挂载点,　所以
 <li>
 应用程序创建的 /storage/emulated/0 路径(空路径,未挂载的目录)　为什么通过 adb shell 看不到呢, 通过什么手段隐藏的?
 
+</ul>
+
+
+<h2 id="toc_1.5">5. 最终答案</h2>
+<ul>
+<li>
+在这里将要解答前面不知道的两个问题
+
+<ul>
+<li>
+为什么MediaServer会没有读写 /storage/emulated/legacy/的权限呢?
+
+<li>
+为什么通过adb shell看不到 /storage/emulated/0 这个目录呢,即使它没有挂载也应该有一个空目录啊?
+
+</ul>
+<li>
+答案
+
+<ul>
+<li>
+文件 android4.2/dalvik/vm/Init.cpp 中的　initZygote()　函数
+<pre>
+static bool initZygote()
+{
+    /* zygote goes into its own process group */
+    setpgid(0,0);
+
+    // See storage config details at http://source.android.com/tech/storage/
+    // Create private mount namespace shared by all children
+    if (unshare(CLONE_NEWNS) == -1) {
+        SLOGE("Failed to unshare(): %s", strerror(errno));
+        return -1;
+    }
+
+    // Mark rootfs as being a slave so that changes from default
+    // namespace only flow into our children.
+    if (mount("rootfs", "/", NULL, (MS_SLAVE | MS_REC), NULL) == -1) {
+        SLOGE("Failed to mount() rootfs as MS_SLAVE: %s", strerror(errno));
+        return -1;
+    }
+
+    // Create a staging tmpfs that is shared by our children; they will
+    // bind mount storage into their respective private namespaces, which
+    // are isolated from each other.
+    const char* target_base = getenv("EMULATED_STORAGE_TARGET");
+    if (target_base != NULL) {
+        if (mount("tmpfs", target_base, "tmpfs", MS_NOSUID | MS_NODEV,
+                "uid=0,gid=1028,mode=0050") == -1) {
+            SLOGE("Failed to mount tmpfs to %s: %s", target_base, strerror(errno));
+            return -1;
+        }
+    }
+
+    return true;
+}
+</pre>
+    *文件android4.2/dalvik/vm/native/dalvik_system_Zygote.cpp的 mountEmulatedStorage(uid_t uid, u4 mountMode)函数,上边已经说了,这里就不再说了.
+
+</ul>
+<li>
+在上述两个地方主要做了三件事
+
+<ul>
+<li>
+先调用了一个 unsahre(), 使本进程的mount点不与其它的进程共享.
+
+<li>
+再对目录 /storage/emulated/ 做了一个 tmpfs 的挂载. 请参考<a href="Linux系统_学习笔记_tmpfs.html">tmpfs是什么</a>
+
+<li>
+然后又以参数MS_BIND调用了mount, 把 /mnt/shell/emulated/0 又挂载到了 /storage/emulated/0/下.
+
+</ul>
+<li>
+释疑
+
+<ul>
+<li>
+/mnt/shell/目录的权限是 700, 用户是shell, 一般的进程都不可能是这个用户,所以一般的进程都没有权限对它进行读写.
+
+</ul>
 </ul>
 </div>
     <br class="clearfloat" />
