@@ -21,7 +21,7 @@
 | [[程序设计_IDE配置_QTCreater调试时提示ptrace不允许的操作|QTCreater调试时提示ptrace不允许的操作]] |
 
 * *Linux系统_学习笔记*
-| [[Linux系统_学习笔记_ubuntu安装极点五笔输入法|ubuntu安装极点五笔输入法]] |   |   |   |
+| [[Linux系统_学习笔记_ubuntu安装极点五笔输入法|ubuntu安装极点五笔输入法]] | [[Linux系统_学习笔记_linuxmint下使用磁盘实用工具|linuxmint下使用磁盘实用工具]] |[[Linux系统_学习笔记_tmpfs|ramfs tmpfs rootfs initramfs和romfs]] |   |
 
 
 * *Linux系统_搭建服务器*

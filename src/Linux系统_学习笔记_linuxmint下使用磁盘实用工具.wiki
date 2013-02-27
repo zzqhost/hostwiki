@@ -1,0 +1,9 @@
+[[首页]]
+
+%title linux mint下使用磁盘实用工具
+=linux mint下使用磁盘实用工具=
+
+* 磁盘实用工具是ubuntu下一个非常好用的磁盘管理及查看工具,但是在Linux mint上怎么找也找不到,怎么回事?
+* 原来从Linux mint 13开始,默认没有安装它，可在“软件管理器”中安装gnome-disk-utility,或通过以下命令进行安装:
+    * sudo apt-get install gnome-disk-utility
+
