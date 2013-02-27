@@ -1,0 +1,40 @@
+[[首页]]
+
+%title 用U盘安装Linux系统的通用方法
+=用U盘安装Linux系统的通用方法=
+
+%toc
+
+==前言==
+* 本篇文章介绍通过在U盘上安装Grub2,并手动在Grub2中启动Linux发行版iso的方法来安装Linux系统.
+* 采用的发行版是Linux-mint 14.1 64 bit.
+* 本人的笔记本是联想Y450,直接通过Universal-USB-Installer制作的U盘,启动时根本进不了启动菜单,花屏了.
+* 所以寻找到了这种方法,　主要参考了 http://www.cnblogs.com/hiflex/archive/2012/07/22/flex.html 并实际实验,修改了一些错误及过时的命令.
+
+==步骤==
+
+===制作安装U盘===
+* 安装Grub2
+    * 可以参考我的博文:　http://blog.csdn.net/zzqhost/article/details/5935317
+    * 主要命令如下:
+        * $ sudo grub-install --root-directory=/media/zzq/*** /dev/sdb
+
+* COPY必要的文件到U盘上
+    * 把iso文件拷贝到U盘的根目录下，
+    * 从iso文件的casper目录下解压出vmliunz和initrd.lz两个文件，把这两个文件也放在U盘的根目录下。
+
+===安装Linuxmint===
+* 以此U盘重启,进入Grub2
+* $ linux (hd0,1)/vmlinuz boot=casper iso-scan/filename=(hd0,1)/linuxmint-14.1-mate-dvd-64bit.iso ro quiet
+* $ initrd (hd0,1)/initrd.lz
+* $ boot 
+
+==Grub2中的一些命令==
+* 参考我的博文http://blog.csdn.net/zzqhost/article/details/5978826
+* 硬盘的表示法可以用: (hd0,1)这样的方式来表示,　如 (hd0,1)/initrd.lz 表示的就是某个分区要目录下的 initrd.lz文件. 
+* hd0,hd1等是硬盘的编号,从0开始,在我这里, hd0是U盘,　hd1是实际的U盘.
+* (hd0,1)中后边的1表示的是分区编号,从1开始.与Linux操作系统中的相同.　1,2,3,4是主分区,从5开始表示逻辑分区
+
+==后记==
+* 这篇文章中的方法在公司的机器中实践通过.　等周末回家在我的小Y上试一下,看看有没有作用?
+* 这个方法可以跳过用Universal-USB-Installer等工具制作的启动盘的启动菜单,直接启动LiveCD.
