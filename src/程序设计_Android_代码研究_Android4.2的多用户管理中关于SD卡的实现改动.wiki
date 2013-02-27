@@ -89,7 +89,7 @@ static bool initZygote()
     return true;
 }
 }}}
-    *文件android4.2/dalvik/vm/native/dalvik_system_Zygote.cpp的 mountEmulatedStorage(uid_t uid, u4 mountMode)函数,上边已经说了,这里就不再说了.
+    * 文件android4.2/dalvik/vm/native/dalvik_system_Zygote.cpp的 mountEmulatedStorage(uid_t uid, u4 mountMode)函数,上边已经说了,这里就不再说了.
 * 在上述两个地方主要做了三件事
     * 先调用了一个 unsahre(), 使本进程的mount点不与其它的进程共享.
     * 再对目录 /storage/emulated/ 做了一个 tmpfs 的挂载. 请参考[[Linux系统_学习笔记_tmpfs|tmpfs是什么]]
