@@ -97,3 +97,6 @@ static bool initZygote()
 * 释疑
     * /mnt/shell/目录的权限是 700, 用户是shell, 一般的进程都不可能是这个用户,所以一般的进程都没有权限对它进行读写.
 
+
+==参考链接==
+* http://blog.csdn.net/stevenliyong/article/details/5343085
