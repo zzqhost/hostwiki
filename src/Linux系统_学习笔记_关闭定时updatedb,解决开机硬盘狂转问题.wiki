@@ -1,0 +1,23 @@
+[[index|首页]]
+%title 关闭定时updatedb,解决开机硬盘狂转问题
+=关闭定时updatedb,解决开机硬盘狂转问题=
+%toc
+
+==现象==
+* 有时刚启动完就会发现硬盘灯总在不停的闪烁。其实这是因为后台有程序在运行。
+* 运行命令
+    * $top
+* 刷新几次就可以知道系统中都有哪此吃资源的大户了。记下它们的名字再做处理。按“q”键退出top程序。
+* 在我机器上引起硬盘狂转的是 updatedb.mlocate, 为硬盘文件建立索引，以便于使用locate命令能找到文件。
+
+==解决==
+* 由于我几乎从来不用locate命令，我决定降低updatedb的频率。
+* 通过下面的查找得知,ubuntu中updatedb是由mlocate来定时启动的。
+* 在/etc搜索updatedb，在/etc/cron.daily下找到mlocate
+* 只要把这个脚本删了或移到其它位置就可以了。
+* 我是将它变成每月运行一次。
+    * $ sudo mv /etc/cron.daily/mlocate /etc/cron.monthly/
+* 问题解决啦！
+
+==一个建议==
+* 系统变慢时，用top查看最占资源的程序。
