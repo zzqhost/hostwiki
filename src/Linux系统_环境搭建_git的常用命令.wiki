@@ -1,0 +1,54 @@
+[[index|首页]]
+
+%title git的常用命令
+
+=git的常用命令=
+
+%toc
+
+==git简介==
+* 关于Git的简介,我就不说了,网上一大堆.　Git就是编程的神器,代码管理不可缺少的东东,自从出现秒杀一切,神么csv, svn 等等,靠边站.
+
+==命令备忘==
+===常用命令备忘===
+* git branch
+* git fetch origin
+* git checkout -b tmp origin/master
+* git rebase origin/master
+
+===git删除远程分支===
+* git push origin :<branchname>
+* git push origin --delete <branchname>
+* git push origin :<tagname>   # 待验证.
+* git push origin --delete tag <tagname>
+
+===git远程分支操作===
+* git branch -a
+* git remote show origin
+* 在本地版本库中删除所有远程版本库中已不存在的分支
+    * $ git remote prune origin
+
+===tag操作相关===
+* 新建一个新TAG
+    * $ git tag -a <tagname>
+* 推送分支到远程服务器
+    * $ git push origin tagname
+    * $ git push origin --tags  # 推送本地所有分支到远程服务器
+* 从远程服务器上取得分支
+    * $ git fetch origin tag <tagname>
+    * $ git fetch origin --tags
+
+===多个远程库的操作===
+* 添加一个新的远程仓库
+    * git remote add origin 'git@gitcafe.com:zzqhost/chuannimei.git'
+
+==操作实例==
+===迁移Git仓库==
+* 以前有一个项目在bitbucket上,但后来bitbucket被墙了,很痛苦,所以就想转移到其它的托管服务器上.　目前选定了gitcafe.
+* 步骤
+    * cd existing_git_repo
+    * git remote add origin 'git@gitcafe.com:zzqhost/chuannimei.git'
+    * git push -u origin master
+* 按以上步骤把需要的分支都搞好.
+* 然后再把所有的分支push到gitcafe上.
+* 好,大功造成.
