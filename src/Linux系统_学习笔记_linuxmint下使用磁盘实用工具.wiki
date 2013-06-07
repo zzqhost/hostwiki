@@ -1,4 +1,4 @@
-[[首页]]
+[[index|首页]]
 
 %title linux mint下使用磁盘实用工具
 =linux mint下使用磁盘实用工具=

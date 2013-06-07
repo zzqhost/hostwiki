@@ -1,4 +1,4 @@
-[[首页]]
+[[index|首页]]
 
 %title ramfs,tmpfs,rootfs,initramfs和romfs
 =ramfs,tmpfs,rootfs,initramfs和romfs=
