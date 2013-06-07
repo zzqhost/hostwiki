@@ -1,0 +1,15 @@
+[[index|首页]]
+
+%title 查看网络状态命令
+
+=查看网络状态命令=
+%toc
+
+==Android手机网络开发中有用的命令==
+* 查看网络包
+    * tcpdump -i wlan0
+* 查看网络当前的状态
+    * netstat
+* 过滤条件
+    * iw phy phy0 wowlan show
+    * iw phy phy0 wowlan disable

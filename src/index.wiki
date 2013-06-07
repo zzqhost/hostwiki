@@ -11,11 +11,12 @@
 
 * *程序设计_Android_环境配置*
 | [[程序设计_Android_环境配置_CTS测试环境搭建及简易步骤|CTS测试环境搭建及简易步骤]] | [[程序设计_Android_环境配置_将Android源代码导入到Eclipse中|将Android源代码导入到Eclipse中]] | [[程序设计_Android_环境配置_配置Android开发环境|配置Android开发环境]] |
+| [[程序设计_Android环境配置_查看网络状态命令|查看网络状态命令]]                    |                                                                                             |                                                                       |
 
 
 * *程序设计_Android_代码研究*
-| [[程序设计_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]]     | [[程序设计_Android_代码研究_HTTP-progressive-streaming分析|HTTP progressive streaming分析]]                        | [[程序设计_Android_代码研究_常用代码及其存放位置备忘|常用代码及其存放位置备忘]] |
-| [[程序设计_Android_代码研究_Android中使用第三方库|Android中使用第三方库]] | [[程序设计_Android_代码研究_Android4.2的多用户管理中关于SD卡的实现改动|Android4.2的多用户管理中关于D卡的实现改动]] |                                                                                 |
+| [[程序设计_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]]     | [[程序设计_Android_代码研究_HTTP-progressive-streaming分析|HTTP progressive streaming分析]]                         | [[程序设计_Android_代码研究_常用代码及其存放位置备忘|常用代码及其存放位置备忘]] |
+| [[程序设计_Android_代码研究_Android中使用第三方库|Android中使用第三方库]] | [[程序设计_Android_代码研究_Android4.2的多用户管理中关于SD卡的实现改动|Android4.2的多用户管理中关于SD卡的实现改动]] |                                                                                 |
 
 * *程序设计_IDE配置*
 | [[程序设计_IDE配置_QTCreater调试时提示ptrace不允许的操作|QTCreater调试时提示ptrace不允许的操作]] |
