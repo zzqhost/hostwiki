@@ -43,7 +43,7 @@
     * git remote add origin 'git@gitcafe.com:zzqhost/chuannimei.git'
 
 ==操作实例==
-===迁移Git仓库==
+===迁移Git仓库===
 * 以前有一个项目在bitbucket上,但后来bitbucket被墙了,很痛苦,所以就想转移到其它的托管服务器上.　目前选定了gitcafe.
 * 步骤
     * cd existing_git_repo
