@@ -23,6 +23,8 @@
 * *SDK地址：*  http://192.168.1.250/share/cm/_stable_release/OMS2.6/
 * *DailyBuild:*  http://192.168.1.8/share/cm/
 
+* *60共享*: smb://192.168.1.60/  用户名: test@borqs.com, 密码: Borqs.com
+
 
 === Windows 共享资源 ===
 * 用户名密码
