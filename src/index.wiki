@@ -1,47 +1,15 @@
 
 %template index_template
-%title allpages
+%title 张志强的wiki
 
-==程序设计==
-* *程序设计_C/C++*
-| [[程序设计_C&C++_Ubuntu下编译安装OpenCV并配置QTCreater|Ubuntu下编译安装OpenCV并配置QTCreater]] |
-
-* *程序设计_Java*
+ == 博客入口 ==
+ | [[http://ftp105557.host185.web522.com/|新博客地址]] |
+ | [[allpages|Github上的老版博客(停止更新,全部文章都在新地址)]] |
 
 
-* *程序设计_Android_环境配置*
-| [[程序设计_Android_环境配置_CTS测试环境搭建及简易步骤|CTS测试环境搭建及简易步骤]] | [[程序设计_Android_环境配置_将Android源代码导入到Eclipse中|将Android源代码导入到Eclipse中]] | [[程序设计_Android_环境配置_配置Android开发环境|配置Android开发环境]] |
-| [[程序设计_Android环境配置_查看网络状态命令|查看网络状态命令]]                    |                                                                                             |                                                                       |
+
+ == 作者的其它博客入口 ==
+ | [[http://blog.csdn.net/zzqhost|作者的CSDN博客]] | [[http://zzqhost.blog.163.com|作者的163博客]] |
 
 
-* *程序设计_Android_代码研究*
-| [[程序设计_Android_代码研究_SkipCutBuffer的研究|SkipCutBuffer的研究]]     | [[程序设计_Android_代码研究_HTTP-progressive-streaming分析|HTTP progressive streaming分析]]                         | [[程序设计_Android_代码研究_常用代码及其存放位置备忘|常用代码及其存放位置备忘]] |
-| [[程序设计_Android_代码研究_Android中使用第三方库|Android中使用第三方库]] | [[程序设计_Android_代码研究_Android4.2的多用户管理中关于SD卡的实现改动|Android4.2的多用户管理中关于SD卡的实现改动]] |                                                                                 |
 
-* *程序设计_IDE配置*
-| [[程序设计_IDE配置_QTCreater调试时提示ptrace不允许的操作|QTCreater调试时提示ptrace不允许的操作]] |
-
-==Linux学习==
-* *Linux系统_学习笔记*
-| [[Linux系统_学习笔记_ubuntu安装极点五笔输入法|ubuntu安装极点五笔输入法]]          | [[Linux系统_学习笔记_linuxmint下使用磁盘实用工具|linuxmint下使用磁盘实用工具]]                     | [[Linux系统_学习笔记_tmpfs|ramfs tmpfs rootfs initramfs和romfs]] |
-| [[Linuxt系统_学习笔记_用U盘安装Linux系统的通用方法|用U盘安装Linux系统的通用方法]] | [[Linux系统_学习笔记_关闭定时updatedb,解决开机硬盘狂转问题|关闭定时updatedb,解决开机硬盘狂转问题]] | [[Linux系统_学习笔记_功能强大的命令dd|功能强大的命令dd]]         |
-
-
-* *Linux系统_环境搭建*
-| [[Linux系统_环境搭建_git的常用命令|git的常用命令]] | | |
-
-
-==多媒体相关==
-| [[多媒体相关_流媒体中用到的几个协议简介|流媒体中用到的几个协议简介]] | [[多媒体相关_DRM标准学习笔记1|DRM标准学习笔记1]] | [[多媒体相关_DRM标准学习笔记2-ForwardLock原理及实现|DRM标准学习笔记2-ForwardLock原理及实现]] |
-| [[多媒体相关_多媒体编解码基础知识|多媒体编解码基础知识]]             | [[多媒体相关_MP4容器格式|MP4容器格式]]           | [[多媒体相关_MIME|MIME(Multipurpose Internet Mail Extensions)]]                              |
-
-
-==关于==
-* *作者的博客*
-| [[http://blog.csdn.net/zzqhost|作者的CSDN博客]] | [[http://zzqhost.blog.163.com|作者的163博客]] | [[http://ftp105557.host185.web522.com/|新博客地址]] |
-
-
-* *关于*
-
-* *友链*
-    - [[http://www.cexci.com/|喜子的CEXCI]]            [[http://www.oeleader.net/|喜子的光电前沿]]
