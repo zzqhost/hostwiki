@@ -38,7 +38,7 @@
 
 ==关于==
 * *作者的博客*
-| [[http://blog.csdn.net/zzqhost|作者的CSDN博客]] | [[http://zzqhost.blog.163.com|作者的163博客]] |
+| [[http://blog.csdn.net/zzqhost|作者的CSDN博客]] | [[http://zzqhost.blog.163.com|作者的163博客]] | [[http://ftp105557.host185.web522.com/|新博客地址]] |
 
 
 * *关于*
