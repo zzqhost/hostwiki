@@ -39,7 +39,11 @@
     * smb://192.168.5.186/testreport
     * *CTS源码：*  smb://192.168.5.186/testreport/Auto_Test_Support/CTS/source_code/cts_4.1_r1/cts/tests/tests/media/src/android/media/cts/MediaPlayerTest.java
     * *[隐藏的Intel共享]*  smb://192.168.5.186/intel
-     
+    * *另一个smb地址*
+        * 主机地址：smb://192.168.7.78
+        * 管理员 --> user : b104admin ,  pass : JFs7xa
+        * guest  --> user : b104guest ,   pass : nBwBB4
+        * 注：管理员有读写权限，guest用户只有只读权限。
 
 === 流媒体测试内网地址 ===
     * *Borqs内部的测试网址：* [[http://borqstom.borqs.com/browser/]]
