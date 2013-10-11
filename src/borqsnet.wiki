@@ -27,23 +27,26 @@
 
 
 === Windows 共享资源 ===
-* 用户名密码
-    * guest
-    * guest
-
 * 连接方式
     * 打开文件管理器，按下Ctrl+L在地址中输入 smb://192.168.5.186
 
-* test组的常用地址
+* test组的常用地址(5.86服务器, 目前已经不用了,已经取消)a
+    * 用户名密码
+        * guest
+        * guest
     * smb://192.168.5.186/
     * smb://192.168.5.186/testreport
     * *CTS源码：*  smb://192.168.5.186/testreport/Auto_Test_Support/CTS/source_code/cts_4.1_r1/cts/tests/tests/media/src/android/media/cts/MediaPlayerTest.java
     * *[隐藏的Intel共享]*  smb://192.168.5.186/intel
-    * *另一个smb地址*
-        * 主机地址：smb://192.168.7.78
-        * 管理员 --> user : b104admin ,  pass : JFs7xa
-        * guest  --> user : b104guest ,   pass : nBwBB4
-        * 注：管理员有读写权限，guest用户只有只读权限。
+
+* *另一个smb地址(192.168.7.78/b104)*
+    * 主机地址：smb://192.168.7.78/b104
+    * 管理员 --> user : b104admin ,  pass : JFs7xa
+    * guest  --> user : b104guest ,   pass : nBwBB4
+    * 注：管理员有读写权限，guest用户只有只读权限。
+* *7.78/intel*
+    * 地址: smb://192.168.7.78/intel/
+    * user : b230  pass: intelppdodm
 
 === 流媒体测试内网地址 ===
     * *Borqs内部的测试网址：* [[http://borqstom.borqs.com/browser/]]
@@ -109,13 +112,13 @@ HTTP live streaming test case are under section, HLS(Http live streaming) Server
     * 12345678
     
 == 用户名密码 ==
-* b649: 6
+* b649 : 6
     * 适用范围: mants
-* b649:ScAxYg2p
+* b649 : ScAxYg2p
     * 适用范围: 各个gerrit和svn,　比如:250, 160, 79这三个server的gerrit.
-* ZHIQIANGZHANG: 3
+* ZHIQIANGZHANG : 3
     * 
-* internal_user:Don't_distribute_this_password_out_of_Borqs
+* internal_user : Don't_distribute_this_password_out_of_Borqs
     * 
-* guest:guest
+* guest : guest
 
