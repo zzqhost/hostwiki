@@ -47,6 +47,10 @@
 * *7.78/intel*
     * 地址: smb://192.168.7.78/intel/
     * user : b230  pass: intelppdodm
+* *7.78/testprivate*
+    *  地址: smb://192.168.7.78/testprivate/
+    *  user: testadmin
+    *  pass: Bbs.Borqs.com
 
 === 流媒体测试内网地址 ===
     * *Borqs内部的测试网址：* [[http://borqstom.borqs.com/browser/]]
